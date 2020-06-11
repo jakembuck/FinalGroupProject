@@ -12,6 +12,9 @@ export class MainPageComponent implements OnInit {
   parksList: any = [];
   activitiesList: any = [];
   imageArray: any = [];
+  data: any;
+  // latitude: string = "";
+  // longitude: string = "";
 
 
   constructor(private service: SiteService, private router: Router, private route: ActivatedRoute) { }
@@ -21,12 +24,17 @@ export class MainPageComponent implements OnInit {
       console.log(response.q)
       this.service.getActivities(response.q).subscribe(response => {
         this.parksList = response.data;
-        this.activitiesList = response.data.activities;
-        console.log(response);
+
+        // this.activitiesList = response.data.activities;
+        console.log(response.data[0]);
+
         // console.log(response.data.activities.name)
       })
+
     })
+
   };
+
 
 
   submitForm(form: NgForm) {
@@ -39,4 +47,12 @@ export class MainPageComponent implements OnInit {
 
 
   }
+
+  getTrails(park): any {
+    this.service.getTrails(park.latitude, park.longitude).subscribe(response => {
+      console.log(response);
+      this.data = response;
+    })
+  }
+
 }

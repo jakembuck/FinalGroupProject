@@ -5,3 +5,13 @@
         <button class="btn search-btn">submit</button>
     </form>
 </div>
+<ul>
+    <li *ngFor="let park of parksList">
+        <h2 (click)="getTrails(park)">{{ park.name }}</h2>
+        <ul>
+            <li *ngFor="let activity of park.activities">
+                <p>{{ activity.name }}</p>
+            </li>
+        </ul>
+    </li>
+</ul>
