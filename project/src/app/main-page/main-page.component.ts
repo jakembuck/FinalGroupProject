@@ -13,6 +13,7 @@ export class MainPageComponent implements OnInit {
   activitiesList: any = [];
   imageArray: any = [];
   data: any;
+  campgroundsArray: any = [];
   // latitude: string = "";
   // longitude: string = "";
 
@@ -22,17 +23,19 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(response => {
       console.log(response.q)
-      this.service.getActivities(response.q).subscribe(response => {
+      this.service.getParks(response.q).subscribe(response => {
         this.parksList = response.data;
-
         // this.activitiesList = response.data.activities;
         console.log(response.data[0]);
-
-        // console.log(response.data.activities.name)
       })
 
     })
-
+    // this.route.queryParams.subscribe(response => {
+    //   this.service.getCampgrounds(response.q).subscribe(campResponse => {
+    //     this.campgroundsArray = campResponse.data;
+    //     console.log(campResponse.data);
+    //   })
+    // })
   };
 
 
