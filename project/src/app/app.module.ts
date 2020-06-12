@@ -9,6 +9,7 @@ import { SearchListComponent } from './search-list/search-list.component';
 import { CampgroundsComponent } from './campgrounds/campgrounds.component';
 import { ParksInfoComponent } from './parks-info/parks-info.component';
 import { TrailsComponent } from './trails/trails.component';
+import { GoogleMapsModule } from '@angular/google-maps'
 
 @NgModule({
   declarations: [
@@ -19,13 +20,15 @@ import { TrailsComponent } from './trails/trails.component';
     ParksInfoComponent,
     TrailsComponent,
 
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    GoogleMapsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
