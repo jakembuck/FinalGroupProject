@@ -11,6 +11,7 @@ export class SiteService {
   campgroundsEndpoint: string = `${this.parksURL}/campgrounds`;
   thingsToDoEndpoint: string = `${this.parksURL}/thingstodo`;
   alertsEndpoint: string = `${this.parksURL}/alerts`;
+  geocodeURL: string = "https://maps.googleapis.com/maps/api/geocode/json"
 
   // hiking trails 
   hikingTrailsKey: string = "3e1877e5e4mshd270349f25b06efp1cfa54jsn5f52b35449be";
@@ -71,6 +72,13 @@ export class SiteService {
     });
 
   }
-
+  getGeocode(q: any): any {
+    return this.http.get(this.geocodeURL, {
+      params: {
+        address: q,
+        key: "AIzaSyDP2PbJZxnFGfqtVYvkswJ-7N56LMyLqN0"
+      }
+    })
+  }
 
 }

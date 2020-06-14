@@ -21,15 +21,7 @@ export class MainPageComponent implements OnInit {
   constructor(private service: SiteService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(response => {
-      console.log(response.q)
-      this.service.getParks(response.q).subscribe(response => {
-        this.parksList = response.data;
-        // this.activitiesList = response.data.activities;
-        console.log(response.data[0]);
-      })
 
-    })
     // this.route.queryParams.subscribe(response => {
     //   this.service.getCampgrounds(response.q).subscribe(campResponse => {
     //     this.campgroundsArray = campResponse.data;
@@ -42,7 +34,7 @@ export class MainPageComponent implements OnInit {
 
   submitForm(form: NgForm) {
     console.log(form.value)
-    this.router.navigate(["/main-page"], {
+    this.router.navigate(["/search-list"], {
       queryParams: {
         q: form.value.search
       }

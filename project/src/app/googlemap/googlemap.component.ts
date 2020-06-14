@@ -11,7 +11,10 @@ export class GooglemapComponent implements OnInit {
   @ViewChild(MapInfoWindow, { static: false }) info: MapInfoWindow
 
   zoom = 12
-  center: google.maps.LatLngLiteral
+  center: any = new google.maps.LatLng({
+    lat: 42.3314,
+    lng: 83.0458
+  });
   options: google.maps.MapOptions = {
     zoomControl: false,
     scrollwheel: false,
@@ -24,12 +27,13 @@ export class GooglemapComponent implements OnInit {
   infoContent = ''
 
   ngOnInit() {
-    navigator.geolocation.getCurrentPosition(position => {
-      this.center = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      }
-    })
+    //   navigator.geolocation.getCurrentPosition(position => {
+    //     this.center = {
+    //       lat: position.coords.latitude,
+    //       lng: position.coords.longitude,
+    //     }
+    //   })
+    // }
   }
 
   zoomIn() {
