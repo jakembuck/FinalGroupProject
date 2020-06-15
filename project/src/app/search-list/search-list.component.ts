@@ -39,9 +39,9 @@ export class SearchListComponent implements OnInit {
       this.service.getParks(response.q, response.state).subscribe(response => {
         this.parksList = response.data;
         console.log(this.parksList);
+        this.markers = [];
         this.parksList.forEach(park => {
           console.log(park)
-          this.markers = [];
           this.markers.push({
             position: new google.maps.LatLng({
               lat: Number(park.latitude),
