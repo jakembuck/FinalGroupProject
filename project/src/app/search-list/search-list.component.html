@@ -10,7 +10,9 @@
     <button class="btn search-btn">submit</button>
   </form>
 </div>
-<google-map [center]="center" [zoom]="zoom"></google-map>
+<google-map [center]="center" [zoom]="zoom">
+  <map-marker *ngFor="let marker of markers" [position]="marker.position"></map-marker>
+</google-map>
 <ul>
   <li *ngFor="let park of parksList">
     <h2 (click)="getTrails(park)">{{ park.name }}</h2>

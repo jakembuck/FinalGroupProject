@@ -13,6 +13,7 @@ export class SearchListComponent implements OnInit {
   data: any;
   zoom: any;
   center: any;
+  markers: any = [];
   states: string[] = [
     'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA',
     'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA',
@@ -35,10 +36,19 @@ export class SearchListComponent implements OnInit {
         });
 
       })
-
       this.service.getParks(response.q, response.state).subscribe(response => {
         this.parksList = response.data;
-        console.log(response)
+        console.log(this.parksList);
+        this.parksList.forEach(park => {
+          console.log(park)
+          this.markers = [];
+          this.markers.push({
+            position: new google.maps.LatLng({
+              lat: Number(park.latitude),
+              lng: Number(park.longitude)
+            })
+          })
+        });
       })
     })
   }
