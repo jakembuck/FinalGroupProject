@@ -11,7 +11,7 @@ import { NgForm } from '@angular/forms';
 export class SearchListComponent implements OnInit {
   parksList: any = [];
   data: any;
-  zoom: 1;
+  zoom: any;
   center: any;
   states: string[] = [
     'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA',
@@ -26,14 +26,15 @@ export class SearchListComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(response => {
       console.log(response)
-      // this.service.getGeocode(response.q).subscribe(response => {
-      //   console.log(response.results[0].geometry.location)
-      //   this.center = new google.maps.LatLng({
-      //     lat: response.results[0].geometry.location.lat,
-      //     lng: response.results[0].geometry.location.lng
-      //   });
+      this.zoom = 7;
+      this.service.getGeocode(response.q).subscribe(response => {
+        console.log(response.results[0].geometry.location)
+        this.center = new google.maps.LatLng({
+          lat: response.results[0].geometry.location.lat,
+          lng: response.results[0].geometry.location.lng
+        });
 
-      // })
+      })
 
       this.service.getParks(response.q, response.state).subscribe(response => {
         this.parksList = response.data;
