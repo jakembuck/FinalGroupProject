@@ -23,11 +23,12 @@ export class SiteService {
 
 
 
-  getParks(q: string): any {
+  getParks(q: string, sc: string): any {
     return this.http.get(this.parksEndpoint, {
       params: {
         q: q,
-        api_key: this.parksKey
+        api_key: this.parksKey,
+        stateCode: sc,
       }
     });
   }

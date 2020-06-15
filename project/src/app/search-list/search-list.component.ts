@@ -13,25 +13,32 @@ export class SearchListComponent implements OnInit {
   data: any;
   zoom: 1;
   center: any;
+  states: string[] = [
+    'AL', 'AK', 'AS', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FM', 'FL', 'GA',
+    'GU', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MH', 'MD', 'MA',
+    'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND',
+    'MP', 'OH', 'OK', 'OR', 'PW', 'PA', 'PR', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT',
+    'VT', 'VI', 'VA', 'WA', 'WV', 'WI', 'WY'
+  ];
 
   constructor(private service: SiteService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(response => {
-      console.log(response.q)
-      this.service.getGeocode(response.q).subscribe(response => {
-        console.log(response.results[0].geometry.location)
-        this.center = new google.maps.LatLng({
-          lat: response.results[0].geometry.location.lat,
-          lng: response.results[0].geometry.location.lng
-        });
+      console.log(response)
+      // this.service.getGeocode(response.q).subscribe(response => {
+      //   console.log(response.results[0].geometry.location)
+      //   this.center = new google.maps.LatLng({
+      //     lat: response.results[0].geometry.location.lat,
+      //     lng: response.results[0].geometry.location.lng
+      //   });
 
-      })
-      this.service.getParks(response.q).subscribe(response => {
+      // })
+
+      this.service.getParks(response.q, response.state).subscribe(response => {
         this.parksList = response.data;
-        console.log(response.data[0]);
+        console.log(response)
       })
-
     })
   }
 
@@ -39,7 +46,9 @@ export class SearchListComponent implements OnInit {
     console.log(form.value)
     this.router.navigate(["/search-list"], {
       queryParams: {
-        q: form.value.search
+        // can change name of state and "q"
+        q: form.value.search,
+        state: form.value.stateSearch
       }
     })
 
