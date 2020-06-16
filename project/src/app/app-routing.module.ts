@@ -5,14 +5,19 @@ import { SearchListComponent } from './search-list/search-list.component';
 import { CampgroundsComponent } from './campgrounds/campgrounds.component';
 import { ParksInfoComponent } from './parks-info/parks-info.component';
 import { TrailsComponent } from './trails/trails.component';
+import { CampgroundInfoComponent } from './campground-info/campground-info.component';
+import { TrailInfoComponent } from './trail-info/trail-info.component';
+import { ParksComponent } from './parks/parks.component';
 
 
 const routes: Routes = [
   { path: "main-page", component: MainPageComponent },
   { path: "search-list", component: SearchListComponent },
   { path: "park-info", component: ParksInfoComponent },
+  { path: "parks", component: ParksComponent },
   { path: "campgrounds", component: CampgroundsComponent },
-  // { path: "campground-info", component: CampgroundsComponent },
+  { path: "campground-info", component: CampgroundInfoComponent },
+  { path: "trail-info", component: TrailInfoComponent },
   { path: "trails", component: TrailsComponent },
   { path: "", redirectTo: "/main-page", pathMatch: "full" },
   { path: "**", redirectTo: "/main-page", pathMatch: "full" }

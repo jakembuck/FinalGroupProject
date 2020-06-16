@@ -1,0 +1,28 @@
+<div class="form-container">
+    <form #searchForm="ngForm" (ngSubmit)=submitForm(searchForm)>
+        <label for="search"></label>
+        <input type="text" id="search" name="search" placeholder="search here" ngModel>
+        <label for="stateSearch"></label>
+        <select name="stateSearch" id="stateSearch" ngModel>
+            <option value="">State</option>
+            <option *ngFor="let state of states" value="{{state.sc}}">{{state.sc}}</option>
+        </select>
+        <button class="btn search-btn">submit</button>
+    </form>
+</div>
+<google-map [center]="center" [zoom]="zoom">
+    <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [title]="marker.title"
+        (mapClick)="openInfo(markerElem, marker.info)">
+    </map-marker>
+    <map-info-window>
+        <h1>{{infoContent?.title}}</h1>
+    </map-info-window>
+</google-map>
+<ul>
+    <li>
+        <div *ngFor="let campground of campgroundsArray">
+            <h2 routerLink="/campground-info">
+                {{ campground.name }}</h2>
+        </div>
+    </li>
+</ul>

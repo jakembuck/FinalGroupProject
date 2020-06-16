@@ -16,7 +16,7 @@ export class ParksInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.parkInfoPageArray = this.service.getParkInfoArray();
-    console.log(this.parkInfoPageArray)
+    // console.log(this.parkInfoPageArray)
     //   this.route.queryParams.subscribe(response => {
     //     console.log(response.q)
     //     this.service.getParks(response.q, response.state).subscribe(parksResponse => {

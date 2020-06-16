@@ -35,11 +35,12 @@ export class SiteService {
       }
     });
   }
-  getCampgrounds(q: string): any {
+  getCampgrounds(q: string, sc: string): any {
     return this.http.get(this.campgroundsEndpoint, {
       params: {
         q: q,
-        api_key: this.parksKey
+        api_key: this.parksKey,
+        stateCode: sc
       }
     });
   };
@@ -86,8 +87,9 @@ export class SiteService {
   }
 
   addToParkInfo(park: any): any {
+    this.parkInfoPageArray = [];
     this.parkInfoPageArray.push(park)
-    console.log(this.parkInfoPageArray)
+    // console.log(this.parkInfoPageArray)
   }
 
   getParkInfoArray(): any {

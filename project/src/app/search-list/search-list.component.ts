@@ -265,7 +265,7 @@ export class SearchListComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe(response => {
       console.log(response)
-      this.zoom = 8;
+      this.zoom = 6;
       let keyTerm: string = null;
       let stateObj: any = null
       if (response.q && response.state) {
@@ -293,10 +293,8 @@ export class SearchListComponent implements OnInit {
 
       this.service.getParks(response.q, response.state).subscribe(response => {
         this.parksList = response.data;
-        console.log(this.parksList);
         this.markers = [];
         this.parksList.forEach(park => {
-          console.log(park)
           this.markers.push({
             info: { title: park.fullName },
             position: new google.maps.LatLng({

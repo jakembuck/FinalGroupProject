@@ -12,7 +12,8 @@ import { TrailsComponent } from './trails/trails.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { CampgroundInfoComponent } from './campground-info/campground-info.component';
-import { TrailInfoComponent } from './trail-info/trail-info.component'
+import { TrailInfoComponent } from './trail-info/trail-info.component';
+import { ParksComponent } from './parks/parks.component'
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TrailInfoComponent } from './trail-info/trail-info.component'
     SearchFormComponent,
     CampgroundInfoComponent,
     TrailInfoComponent,
+    ParksComponent,
 
 
   ],

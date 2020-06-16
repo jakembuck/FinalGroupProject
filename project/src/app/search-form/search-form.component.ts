@@ -291,10 +291,9 @@ export class SearchFormComponent implements OnInit {
 
       this.service.getParks(response.q, response.state).subscribe(response => {
         this.parksList = response.data;
-        console.log(this.parksList);
+        // console.log(this.parksList);
         this.markers = [];
         this.parksList.forEach(park => {
-          console.log(park)
           this.markers.push({
             info: { title: park.fullName },
             position: new google.maps.LatLng({
@@ -327,7 +326,7 @@ export class SearchFormComponent implements OnInit {
   }
   getTrails(park): any {
     this.service.getTrails(park.latitude, park.longitude).subscribe(response => {
-      console.log(response);
+      // console.log(response);
       this.data = response;
     })
   }
