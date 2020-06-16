@@ -5,11 +5,11 @@ import { NgForm } from '@angular/forms';
 import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 
 @Component({
-  selector: 'app-search-list',
-  templateUrl: './search-list.component.html',
-  styleUrls: ['./search-list.component.css']
+  selector: 'app-search-form',
+  templateUrl: './search-form.component.html',
+  styleUrls: ['./search-form.component.css']
 })
-export class SearchListComponent implements OnInit {
+export class SearchFormComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap
   @ViewChild(MapInfoWindow, { static: false }) info: MapInfoWindow
 
@@ -330,12 +330,6 @@ export class SearchListComponent implements OnInit {
       console.log(response);
       this.data = response;
     })
-  }
-
-  addToParkInfo(park): any {
-    park.isclicked === true
-    this.service.addToParkInfo(park)
-
   }
 
 }

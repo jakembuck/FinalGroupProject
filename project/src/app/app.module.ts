@@ -9,7 +9,8 @@ import { SearchListComponent } from './search-list/search-list.component';
 import { CampgroundsComponent } from './campgrounds/campgrounds.component';
 import { ParksInfoComponent } from './parks-info/parks-info.component';
 import { TrailsComponent } from './trails/trails.component';
-import { GoogleMapsModule } from '@angular/google-maps'
+import { GoogleMapsModule } from '@angular/google-maps';
+import { SearchFormComponent } from './search-form/search-form.component'
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { GoogleMapsModule } from '@angular/google-maps'
     CampgroundsComponent,
     ParksInfoComponent,
     TrailsComponent,
+    SearchFormComponent,
 
 
   ],

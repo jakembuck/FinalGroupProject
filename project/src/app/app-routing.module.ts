@@ -10,7 +10,7 @@ import { TrailsComponent } from './trails/trails.component';
 const routes: Routes = [
   { path: "main-page", component: MainPageComponent },
   { path: "search-list", component: SearchListComponent },
-  { path: "parks-info", component: ParksInfoComponent },
+  { path: "park-info", component: ParksInfoComponent },
   { path: "campgrounds", component: CampgroundsComponent },
   { path: "trails", component: TrailsComponent },
   { path: "", redirectTo: "/main-page", pathMatch: "full" },

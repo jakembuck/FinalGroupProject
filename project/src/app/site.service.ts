@@ -11,7 +11,8 @@ export class SiteService {
   campgroundsEndpoint: string = `${this.parksURL}/campgrounds`;
   thingsToDoEndpoint: string = `${this.parksURL}/thingstodo`;
   alertsEndpoint: string = `${this.parksURL}/alerts`;
-  geocodeURL: string = "https://maps.googleapis.com/maps/api/geocode/json"
+  geocodeURL: string = "https://maps.googleapis.com/maps/api/geocode/json";
+  parkInfoPageArray: any = [];
 
   // hiking trails 
   hikingTrailsKey: string = "3e1877e5e4mshd270349f25b06efp1cfa54jsn5f52b35449be";
@@ -82,4 +83,12 @@ export class SiteService {
     })
   }
 
+  addToParkInfo(park: any): any {
+    this.parkInfoPageArray.push(park)
+    console.log(this.parkInfoPageArray)
+  }
+
+  getParkInfoArray(): any {
+    return this.parkInfoPageArray
+  }
 }
