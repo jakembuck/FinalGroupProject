@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: "search-list", component: SearchListComponent },
   { path: "park-info", component: ParksInfoComponent },
   { path: "campgrounds", component: CampgroundsComponent },
+  // { path: "campground-info", component: CampgroundsComponent },
   { path: "trails", component: TrailsComponent },
   { path: "", redirectTo: "/main-page", pathMatch: "full" },
   { path: "**", redirectTo: "/main-page", pathMatch: "full" }

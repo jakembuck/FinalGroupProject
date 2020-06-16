@@ -4,6 +4,10 @@
     <!-- look back for work around of physical address inside object inside array -->
     <p>Phone Number: {{ parkInfo.contacts.phoneNumbers[0].phoneNumber }}</p>
     <p>Email: {{ parkInfo.contacts.emailAddresses[0].emailAddress }}</p>
+    <!-- <div class="alerts">
+        <p></p>
+    </div> -->
+
     <!-- come back and look for a different solution  -->
     <div class="weekday-hours">
         <p class="hours monday">Monday: {{parkInfo.operatingHours[0].standardHours.monday}}</p>
@@ -13,5 +17,16 @@
         <p class="hours friday">Friday: {{parkInfo.operatingHours[0].standardHours.friday}}</p>
         <p class="hours saturday">Saturday: {{parkInfo.operatingHours[0].standardHours.saturday}}</p>
         <p class="hours sunday">Sunday: {{parkInfo.operatingHours[0].standardHours.sunday}}</p>
+    </div>
+    <p>{{ parkInfo.description }}</p>
+    <div class="activities-list-container">
+        <h3>Activities</h3>
+        <ul>
+            <li *ngFor="let activity of parkInfo.activities">
+                <p>{{ activity.name }}</p>
+            </li>
+        </ul>
+        <a href="#">Get Trails</a>
+        <a href="#">Get Campsites</a>
     </div>
 </div>

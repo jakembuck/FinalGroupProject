@@ -11,11 +11,7 @@
   <li>
     <div *ngFor="let park of parksList">
       <h2 (click)="getTrails(park)" (click)=addToParkInfo(park) routerLink="/park-info">{{ park.name }}</h2>
-      <ul>
-        <li *ngFor="let activity of park.activities">
-          <p>{{ activity.name }}</p>
-        </li>
-      </ul>
+
     </div>
   </li>
 </ul>

@@ -10,7 +10,9 @@ import { CampgroundsComponent } from './campgrounds/campgrounds.component';
 import { ParksInfoComponent } from './parks-info/parks-info.component';
 import { TrailsComponent } from './trails/trails.component';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { SearchFormComponent } from './search-form/search-form.component'
+import { SearchFormComponent } from './search-form/search-form.component';
+import { CampgroundInfoComponent } from './campground-info/campground-info.component';
+import { TrailInfoComponent } from './trail-info/trail-info.component'
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { SearchFormComponent } from './search-form/search-form.component'
     ParksInfoComponent,
     TrailsComponent,
     SearchFormComponent,
+    CampgroundInfoComponent,
+    TrailInfoComponent,
 
 
   ],
