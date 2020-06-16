@@ -313,16 +313,42 @@ export class SearchFormComponent implements OnInit {
   }
 
   submitForm(form: NgForm) {
-    console.log(form.value)
-    this.router.navigate(["/search-list"], {
-      queryParams: {
-        // can change name of state and "q"
-        q: form.value.search,
-        state: form.value.stateSearch
+    this.route.url.subscribe(response => {
+      if (response[0].path === "main-page") {
+        this.router.navigate(["/search-list"], {
+          queryParams: {
+            // can change name of state and "q"
+            q: form.value.search,
+            state: form.value.stateSearch
+          }
+        })
+      } else if (response[0].path === "search-list") {
+        this.router.navigate(["/search-list"], {
+          queryParams: {
+            // can change name of state and "q"
+            q: form.value.search,
+            state: form.value.stateSearch
+          }
+        })
+      } else if (response[0].path === "campgrounds") {
+        this.router.navigate(["/campgrounds"], {
+          queryParams: {
+            // can change name of state and "q"
+            q: form.value.search,
+            state: form.value.stateSearch
+          }
+        })
+      } else if (response[0].path === "trails") {
+        this.router.navigate(["/trails"], {
+          queryParams: {
+            // can change name of state and "q"
+            q: form.value.search,
+            state: form.value.stateSearch
+          }
+        })
       }
     })
-
-
+    console.log(form.value);
   }
   getTrails(park): any {
     this.service.getTrails(park.latitude, park.longitude).subscribe(response => {

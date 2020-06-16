@@ -319,14 +319,4 @@ export class CampgroundsComponent implements OnInit {
     console.log(marker, content);
     this.info.open(marker)
   }
-
-  submitForm(form: NgForm) {
-    console.log(form.value)
-    this.router.navigate(["/campgrounds"], {
-      queryParams: {
-        q: form.value.search,
-        state: form.value.stateSearch
-      }
-    })
-  }
 };

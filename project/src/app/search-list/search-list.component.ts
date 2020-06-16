@@ -263,6 +263,10 @@ export class SearchListComponent implements OnInit {
   constructor(private service: SiteService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.url.subscribe(response => {
+      console.log(response)
+    })
+
     this.route.queryParams.subscribe(response => {
       console.log(response)
       this.zoom = 6;
@@ -283,6 +287,8 @@ export class SearchListComponent implements OnInit {
       } else if (response.q == null && response.state == null) {
         keyTerm = ""
       }
+
+
       this.service.getGeocode(keyTerm).subscribe(response => {
         console.log(response.results[0].geometry.location)
         this.center = new google.maps.LatLng({
