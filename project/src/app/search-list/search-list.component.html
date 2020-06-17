@@ -10,6 +10,9 @@
 <ul>
   <li>
     <div *ngFor="let park of parksList" (click)="getTrails(park)" (click)=addToParkInfo(park) routerLink="/park-info">
+      <div class="park-images">
+        <img src="{{ park.images[0].url }}" alt="{{ park.images[0].altText }}" width="200px" height="200px">
+      </div>
       <h2>{{ park.name }}</h2>
       <div *ngFor="let parkAddress of park.addresses">
         <h3 *ngIf="parkAddress.type === 'Physical'">{{parkAddress.city}}, {{parkAddress.stateCode}}</h3>
