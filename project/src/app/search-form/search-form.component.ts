@@ -347,6 +347,15 @@ export class SearchFormComponent implements OnInit {
           }
         })
       }
+      else if (response[0].path === "parks") {
+        this.router.navigate(["/parks"], {
+          queryParams: {
+            // can change name of state and "q"
+            q: form.value.search,
+            state: form.value.stateSearch
+          }
+        })
+      }
     })
     console.log(form.value);
   }

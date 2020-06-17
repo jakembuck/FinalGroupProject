@@ -18,7 +18,7 @@ export class SiteService {
   hikingTrailsKey: string = "3e1877e5e4mshd270349f25b06efp1cfa54jsn5f52b35449be";
   trailLocationUrl: string = "https://trailapi-trailapi.p.rapidapi.com/trails/explore/";
   trailApiHost: string = "trailapi-trailapi.p.rapidapi.com";
-  // limit: any = 500;
+  limit: any = 20;
   // lat: any;
   // lon: any;
   constructor(private http: HttpClient) { }
@@ -31,7 +31,7 @@ export class SiteService {
         q: q,
         api_key: this.parksKey,
         stateCode: sc,
-        // limit: this.limit
+        limit: this.limit
       }
     });
   }
