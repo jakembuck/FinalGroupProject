@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SiteService } from '../site.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-campground-info',
@@ -6,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./campground-info.component.css']
 })
 export class CampgroundInfoComponent implements OnInit {
+  campgroundInfoPageArray: any = [];
 
-  constructor() { }
+  constructor(private service: SiteService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.campgroundInfoPageArray = this.service.getCampgroundInfoArray();
   }
 
 }

@@ -269,6 +269,7 @@ export class ParksComponent implements OnInit {
     //     console.log(campResponse.data);
     //   })
     // })
+    this.getDefaultParks()
     this.route.queryParams.subscribe(response => {
       console.log(response)
       this.zoom = 6;
@@ -313,6 +314,21 @@ export class ParksComponent implements OnInit {
       })
     });
   };
+
+  getDefaultParks() {
+    this.router.navigate(["/parks"], {
+      queryParams: {
+        // can change name of state and "q"
+        q: "",
+        state: ""
+      }
+    })
+  }
+
+  addToParkInfo(park): any {
+    park.isclicked === true
+    this.service.addToParkInfo(park)
+  }
 
   openInfo(marker: MapMarker, content: any) {
     this.infoContent = content;

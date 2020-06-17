@@ -1,1 +1,30 @@
-<p>campground-info works!</p>
+<div class="campground-info-container" *ngFor="let campgroundInfo of campgroundInfoPageArray">
+  <h1 class="campground-info-title">{{campgroundInfo.name}}</h1>
+  <p>Phone Number: {{ campgroundInfo.contacts.phoneNumbers[0].phoneNumber }}</p>
+  <p>Email: {{ campgroundInfo.contacts.emailAddresses[0].emailAddress }}</p>
+  <div class="weekday-hours">
+    <p class="hours description">{{campgroundInfo.operatingHours[0].description}}</p>
+    <p class="hours monday">Monday: {{campgroundInfo.operatingHours[0].standardHours.monday}}</p>
+    <p class="hours tuesday">Tuesday: {{campgroundInfo.operatingHours[0].standardHours.tuesday}}</p>
+    <p class="hours wednesday">Wednesday: {{campgroundInfo.operatingHours[0].standardHours.wednesday}}</p>
+    <p class="hours thursday">Thursday: {{campgroundInfo.operatingHours[0].standardHours.thursday}}</p>
+    <p class="hours friday">Friday: {{campgroundInfo.operatingHours[0].standardHours.friday}}</p>
+    <p class="hours saturday">Saturday: {{campgroundInfo.operatingHours[0].standardHours.saturday}}</p>
+    <p class="hours sunday">Sunday: {{campgroundInfo.operatingHours[0].standardHours.sunday}}</p>
+  </div>
+  <p>{{ campgroundInfo.description }}</p>
+  <a href="{{campgroundInfo.reservationUrl}}">Make a Reservation</a>
+  <p>Number of Available Sites: {{campgroundInfo.numberOfSitesReservable}}</p>
+  <p>HORSES??!!: {{campgroundInfo.campsites.horse}}</p>
+  <div class="activities-list-container">
+    <h3>Amenities</h3>
+    <ul>
+      <li *ngFor="let activity of campgroundInfo.amenities">
+        <p>{{ amenities.showers }}</p>
+        <p>{{ amenities.toilets }}</p>
+      </li>
+    </ul>
+    <a href="#" routerLink="/trail-info">Get Trails</a>
+    <a href="#" routerLink="/campground-info">Get Campsites</a>
+  </div>
+</div>

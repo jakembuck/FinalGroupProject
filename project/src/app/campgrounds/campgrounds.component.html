@@ -10,7 +10,7 @@
 <ul>
   <li>
     <div *ngFor="let campground of campgroundsArray">
-      <h2 routerLink="/campground-info">
+      <h2 (click)=addToCampgroundInfo(campground) routerLink="/campground-info">
         {{ campground.name }}</h2>
     </div>
   </li>

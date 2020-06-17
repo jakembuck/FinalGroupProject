@@ -269,6 +269,7 @@ export class CampgroundsComponent implements OnInit {
     //     console.log(campResponse.data);
     //   })
     // })
+    this.getDefaultCampgrounds();
     this.route.queryParams.subscribe(response => {
       console.log(response)
       this.zoom = 6;
@@ -313,6 +314,21 @@ export class CampgroundsComponent implements OnInit {
       })
     });
   };
+
+  getDefaultCampgrounds() {
+    this.router.navigate(["/campgrounds"], {
+      queryParams: {
+        // can change name of state and "q"
+        q: "",
+        state: ""
+      }
+    })
+  }
+
+  addToCampgroundInfo(campground): any {
+    campground.isclicked === true
+    this.service.addToCampgroundInfo(campground)
+  }
 
   openInfo(marker: MapMarker, content: any) {
     this.infoContent = content;
