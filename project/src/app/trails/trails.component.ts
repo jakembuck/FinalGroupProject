@@ -16,11 +16,14 @@ export class TrailsComponent implements OnInit {
   trailsLat: any;
   trailsLon: any;
   parksList: any = [];
+  parkInfoPageArray: any = [];
   data: any;
   zoom: any;
   center: any;
   markers: any = [];
   title: any;
+  lat: any = null;
+  lon: any = null;
   label: any;
   infoContent: any;
   states: any[] = [
@@ -265,10 +268,17 @@ export class TrailsComponent implements OnInit {
   constructor(private service: SiteService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.getDefaultTrails()
+    this.getDefaultTrails();
     this.route.queryParams.subscribe(response => {
       console.log(response)
       this.zoom = 6;
+      this.parkInfoPageArray = this.service.parkInfoPageArray;
+
+      console.log(this.parkInfoPageArray);
+      this.lat = this.parkInfoPageArray[0].latitude;
+      console.log(this.lat);
+      this.lon = this.parkInfoPageArray[0].longitude;
+      // console.log(longitude);
       // let keyTerm: string = null;
       // let stateObj: any = null
       // if (response.q && response.state) {
@@ -296,22 +306,21 @@ export class TrailsComponent implements OnInit {
       // this.service.getParks(response.q, response.state).subscribe(response => {
       //   this.parksList = response.data;
       // });
-      let latitude = 40.1108;
-      let longitude = -105.7463;
-      this.service.getTrails(latitude, longitude).subscribe(response => {
-        this.trailsArray = response;
+
+      this.service.getTrails(this.lat, this.lon).subscribe(response => {
+        this.trailsArray = response.trails;
         console.log(this.trailsArray);
         this.markers = [];
-        this.trailsArray.forEach(trail => {
-          console.log(trail);
-          this.markers.push({
-            info: { title: trail.name },
-            position: new google.maps.LatLng({
-              lat: Number(trail.latitude),
-              lng: Number(trail.longitude)
-            })
-          })
-        });
+        // this.trailsArray.forEach(trail => {
+        //   console.log(trail);
+        //   this.markers.push({
+        //     info: { title: trail.name },
+        //     position: new google.maps.LatLng({
+        //       lat: Number(trail.latitude),
+        //       lng: Number(trail.longitude)
+        //     })
+        //   })
+        // });
       })
     });
   };
@@ -319,8 +328,8 @@ export class TrailsComponent implements OnInit {
     this.router.navigate(["/trails"], {
       queryParams: {
         // can change name of state and "q"
-        lat: "40.1108",
-        lon: "-105.7463"
+        lat: this.lat,
+        lon: this.lon
       }
     })
   }

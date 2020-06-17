@@ -9,7 +9,7 @@
 </google-map>
 <ul>
   <li>
-    <div *ngFor="let trail of trailsArray" (click)=addToTrailInfo(trail) routerLink="/trail-info">
+    <div *ngFor="let trail of trailsArray; index as i" (click)=addToTrailInfo(trail) routerLink="/trail-info">
       <h2>{{ trail.name }}</h2>
     </div>
   </li>
