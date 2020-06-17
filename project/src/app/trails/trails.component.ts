@@ -265,54 +265,69 @@ export class TrailsComponent implements OnInit {
   constructor(private service: SiteService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.getDefaultTrails()
     this.route.queryParams.subscribe(response => {
       console.log(response)
       this.zoom = 6;
-      let keyTerm: string = null;
-      let stateObj: any = null
-      if (response.q && response.state) {
-        stateObj = this.states.find(state => {
-          return state.sc === response.state
-        })
-        keyTerm = `${response.q} ${stateObj.name}`
-      } else if (response.q) {
-        keyTerm = response.q
-      } else if (response.state) {
-        stateObj = this.states.find(state => {
-          return state.sc === response.state
-        })
-        keyTerm = stateObj.name
-      } else if (response.q == null && response.state == null) {
-        keyTerm = ""
-      }
-      this.service.getGeocode(keyTerm).subscribe(response => {
-        console.log(response.results[0].geometry.location)
-        this.center = new google.maps.LatLng({
-          lat: response.results[0].geometry.location.lat,
-          lng: response.results[0].geometry.location.lng
-        });
-      });
-      this.service.getParks(response.q, response.state).subscribe(response => {
-        this.parksList = response.data;
-      });
-      // this.service.getTrails(park.latitude, park.longitude).subscribe(response => {
-      //   this.trailsArray = response.data;
-      //   console.log(this.trailsArray);
-      //   this.markers = [];
-      //   this.trailsArray.forEach(trail => {
-      //     console.log(trail);
-      //     this.markers.push({
-      //       info: { title: trail.name },
-      //       position: new google.maps.LatLng({
-      //         lat: Number(trail.latitude),
-      //         lng: Number(trail.longitude)
-      //       })
-      //     })
+      // let keyTerm: string = null;
+      // let stateObj: any = null
+      // if (response.q && response.state) {
+      //   stateObj = this.states.find(state => {
+      //     return state.sc === response.state
+      //   })
+      //   keyTerm = `${response.q} ${stateObj.name}`
+      // } else if (response.q) {
+      //   keyTerm = response.q
+      // } else if (response.state) {
+      //   stateObj = this.states.find(state => {
+      //     return state.sc === response.state
+      //   })
+      //   keyTerm = stateObj.name
+      // } else if (response.q == null && response.state == null) {
+      //   keyTerm = ""
+      // }
+      // this.service.getGeocode(keyTerm).subscribe(response => {
+      //   console.log(response.results[0].geometry.location)
+      //   this.center = new google.maps.LatLng({
+      //     lat: response.results[0].geometry.location.lat,
+      //     lng: response.results[0].geometry.location.lng
       //   });
-      // })
+      // });
+      // this.service.getParks(response.q, response.state).subscribe(response => {
+      //   this.parksList = response.data;
+      // });
+      let latitude = 40.1108;
+      let longitude = -105.7463;
+      this.service.getTrails(latitude, longitude).subscribe(response => {
+        this.trailsArray = response;
+        console.log(this.trailsArray);
+        this.markers = [];
+        this.trailsArray.forEach(trail => {
+          console.log(trail);
+          this.markers.push({
+            info: { title: trail.name },
+            position: new google.maps.LatLng({
+              lat: Number(trail.latitude),
+              lng: Number(trail.longitude)
+            })
+          })
+        });
+      })
     });
   };
-
+  getDefaultTrails() {
+    this.router.navigate(["/trails"], {
+      queryParams: {
+        // can change name of state and "q"
+        lat: "40.1108",
+        lon: "-105.7463"
+      }
+    })
+  }
+  addToTrailInfo(trail): any {
+    trail.isclicked === true
+    this.service.addToTrailInfo(trail)
+  }
   openInfo(marker: MapMarker, content: any) {
     this.infoContent = content;
     console.log(marker, content);

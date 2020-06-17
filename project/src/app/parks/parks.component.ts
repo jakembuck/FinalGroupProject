@@ -272,7 +272,7 @@ export class ParksComponent implements OnInit {
     this.getDefaultParks()
     this.route.queryParams.subscribe(response => {
       console.log(response)
-      this.zoom = 6;
+      this.zoom = 4;
       let keyTerm: string = null;
       let stateObj: any = null
       if (response.q && response.state) {

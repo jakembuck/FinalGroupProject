@@ -1,32 +1,34 @@
 <div class="park-info-container" *ngFor="let parkInfo of parkInfoPageArray">
-    <h1 class="park-info-title">{{parkInfo.fullName}}</h1>
-    <h2>{{ parkInfo.designation }}</h2>
-    <!-- look back for work around of physical address inside object inside array -->
-    <p>Phone Number: {{ parkInfo.contacts.phoneNumbers[0].phoneNumber }}</p>
-    <p>Email: {{ parkInfo.contacts.emailAddresses[0].emailAddress }}</p>
-    <!-- <div class="alerts">
+  <h1 class="park-info-title">{{parkInfo.fullName}}</h1>
+  <h2>{{ parkInfo.designation }}</h2>
+  <div *ngFor="let parkAddress of parkInfo.addresses">
+    <h3 *ngIf="parkAddress.type === 'Physical'">{{parkAddress.city}}, {{parkAddress.stateCode}}</h3>
+  </div>
+  <p>Phone Number: {{ parkInfo.contacts.phoneNumbers[0].phoneNumber }}</p>
+  <p>Email: {{ parkInfo.contacts.emailAddresses[0].emailAddress }}</p>
+  <!-- <div class="alerts">
         <p></p>
     </div> -->
 
-    <!-- come back and look for a different solution  -->
-    <div class="weekday-hours">
-        <p class="hours monday">Monday: {{parkInfo.operatingHours[0].standardHours.monday}}</p>
-        <p class="hours tuesday">Tuesday: {{parkInfo.operatingHours[0].standardHours.tuesday}}</p>
-        <p class="hours wednesday">Wednesday: {{parkInfo.operatingHours[0].standardHours.wednesday}}</p>
-        <p class="hours thursday">Thursday: {{parkInfo.operatingHours[0].standardHours.thursday}}</p>
-        <p class="hours friday">Friday: {{parkInfo.operatingHours[0].standardHours.friday}}</p>
-        <p class="hours saturday">Saturday: {{parkInfo.operatingHours[0].standardHours.saturday}}</p>
-        <p class="hours sunday">Sunday: {{parkInfo.operatingHours[0].standardHours.sunday}}</p>
-    </div>
-    <p>{{ parkInfo.description }}</p>
-    <div class="activities-list-container">
-        <h3>Activities</h3>
-        <ul>
-            <li *ngFor="let activity of parkInfo.activities">
-                <p>{{ activity.name }}</p>
-            </li>
-        </ul>
-        <a href="#" routerLink="/trail-info">Get Trails</a>
-        <a href="#" routerLink="/campground-info">Get Campsites</a>
-    </div>
+  <!-- come back and look for a different solution  -->
+  <div class="weekday-hours">
+    <p class="hours monday">Monday: {{parkInfo.operatingHours[0].standardHours.monday}}</p>
+    <p class="hours tuesday">Tuesday: {{parkInfo.operatingHours[0].standardHours.tuesday}}</p>
+    <p class="hours wednesday">Wednesday: {{parkInfo.operatingHours[0].standardHours.wednesday}}</p>
+    <p class="hours thursday">Thursday: {{parkInfo.operatingHours[0].standardHours.thursday}}</p>
+    <p class="hours friday">Friday: {{parkInfo.operatingHours[0].standardHours.friday}}</p>
+    <p class="hours saturday">Saturday: {{parkInfo.operatingHours[0].standardHours.saturday}}</p>
+    <p class="hours sunday">Sunday: {{parkInfo.operatingHours[0].standardHours.sunday}}</p>
+  </div>
+  <p>{{ parkInfo.description }}</p>
+  <div class="activities-list-container">
+    <h3>Activities</h3>
+    <ul>
+      <li *ngFor="let activity of parkInfo.activities">
+        <p>{{ activity.name }}</p>
+      </li>
+    </ul>
+    <a href="#" routerLink="/trails">Get Trails</a>
+    <a href="#" routerLink="/campgrounds">Get Campsites</a>
+  </div>
 </div>

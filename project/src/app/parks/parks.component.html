@@ -9,9 +9,11 @@
 </google-map>
 <ul>
   <li>
-    <div *ngFor="let park of parksArray">
-      <h2 (click)=addToParkInfo(park) routerLink="/park-info">
-        {{ park.name }}</h2>
+    <div *ngFor="let park of parksArray" (click)=addToParkInfo(park) routerLink="/park-info">
+      <h2>{{ park.name }}</h2>
+      <div *ngFor="let parkAddress of park.addresses">
+        <h3 *ngIf="parkAddress.type === 'Physical'">{{parkAddress.city}}, {{parkAddress.stateCode}}</h3>
+      </div>
     </div>
   </li>
 </ul>

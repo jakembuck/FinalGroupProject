@@ -1,1 +1,16 @@
-<p>trails works!</p>
+<app-search-form></app-search-form>
+<google-map [center]="center" [zoom]="zoom">
+  <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [title]="marker.title"
+    (mapClick)="openInfo(markerElem, marker.info)">
+  </map-marker>
+  <map-info-window>
+    <h1>{{infoContent?.title}}</h1>
+  </map-info-window>
+</google-map>
+<ul>
+  <li>
+    <div *ngFor="let trail of trailsArray" (click)=addToTrailInfo(trail) routerLink="/trail-info">
+      <h2>{{ trail.name }}</h2>
+    </div>
+  </li>
+</ul>

@@ -15,11 +15,12 @@ export class SiteService {
 
   parkInfoPageArray: any = [];
   campgroundInfoPageArray: any = [];
+  trailInfoPageArray: any = [];
 
   // hiking trails 
-  hikingTrailsKey: string = "3e1877e5e4mshd270349f25b06efp1cfa54jsn5f52b35449be";
-  trailLocationUrl: string = "https://trailapi-trailapi.p.rapidapi.com/trails/explore/";
-  trailApiHost: string = "trailapi-trailapi.p.rapidapi.com";
+  hikingTrailsKey: string = "200802785-232f5acce6a2f23888902edffe9f1bcf";
+  trailLocationUrl: string = "https://www.hikingproject.com/data/get-trails";
+
   limit: any = 20;
   // lat: any;
   // lon: any;
@@ -47,7 +48,6 @@ export class SiteService {
       }
     });
   };
-
   getAlerts(q: string): any {
     return this.http.get(this.alertsEndpoint, {
       params: {
@@ -67,18 +67,11 @@ export class SiteService {
   getTrails(latitude: any, longitude: any): any {
     return this.http.get(this.trailLocationUrl, {
       params: {
-        // api_key: this.apiKey,
+        key: this.hikingTrailsKey,
         lat: latitude,
         lon: longitude
       },
-
-      headers: {
-        'x-rapidapi-key': this.hikingTrailsKey,
-        'x-rapidapi-host': this.trailApiHost
-      }
-
     });
-
   }
   getGeocode(q: any): any {
     return this.http.get(this.geocodeURL, {
@@ -88,23 +81,27 @@ export class SiteService {
       }
     })
   }
-
   addToParkInfo(park: any): any {
     this.parkInfoPageArray = [];
     this.parkInfoPageArray.push(park)
     // console.log(this.parkInfoPageArray)
   }
-
   addToCampgroundInfo(campground: any): any {
     this.campgroundInfoPageArray = [];
     this.campgroundInfoPageArray.push(campground)
     // console.log(this.parkInfoPageArray)
   }
-
+  addToTrailInfo(trail: any): any {
+    this.trailInfoPageArray = [];
+    this.trailInfoPageArray.push(trail)
+    // console.log(this.parkInfoPageArray)
+  }
+  getTrailInfoArray(): any {
+    return this.trailInfoPageArray
+  }
   getParkInfoArray(): any {
     return this.parkInfoPageArray
   }
-
   getCampgroundInfoArray(): any {
     return this.campgroundInfoPageArray
   }

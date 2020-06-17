@@ -1,16 +1,19 @@
 <app-search-form></app-search-form>
 <google-map [center]="center" [zoom]="zoom">
-    <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [title]="marker.title"
-        (mapClick)="openInfo(markerElem, marker.info)">
-    </map-marker>
-    <map-info-window>
-        <h1>{{infoContent?.title}}</h1>
-    </map-info-window>
+  <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [title]="marker.title"
+    (mapClick)="openInfo(markerElem, marker.info)">
+  </map-marker>
+  <map-info-window>
+    <h1>{{infoContent?.title}}</h1>
+  </map-info-window>
 </google-map>
 <ul>
-    <li>
-        <div *ngFor="let park of parksList">
-            <h2 (click)="getTrails(park)" (click)=addToParkInfo(park) routerLink="/park-info">{{ park.name }}</h2>
-        </div>
-    </li>
+  <li>
+    <div *ngFor="let park of parksList" (click)="getTrails(park)" (click)=addToParkInfo(park) routerLink="/park-info">
+      <h2>{{ park.name }}</h2>
+      <div *ngFor="let parkAddress of park.addresses">
+        <h3 *ngIf="parkAddress.type === 'Physical'">{{parkAddress.city}}, {{parkAddress.stateCode}}</h3>
+      </div>
+    </div>
+  </li>
 </ul>
