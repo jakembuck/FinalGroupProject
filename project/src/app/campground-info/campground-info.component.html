@@ -1,8 +1,10 @@
 <div class="campground-info-container" *ngFor="let campgroundInfo of campgroundInfoPageArray">
   <h1 class="campground-info-title">{{campgroundInfo.name}}</h1>
-  <p *ngIf="campgroundInfo.contacts.phoneNumber">Phone Number: {{ campgroundInfo.contacts.phoneNumbers[0].phoneNumber }}
+  <p *ngIf="campgroundInfo.contacts.phoneNumber">Phone Number:
+    {{ campgroundInfo.contacts.phoneNumbers[0]?.phoneNumber }}
   </p>
-  <p>Email: {{ campgroundInfo.contacts.emailAddresses[0].emailAddress }}</p>
+  <p *ngIf="campgroundInfo.contacts.emailAddress">Email: {{ campgroundInfo.contacts.emailAddresses[0]?.emailAddress }}
+  </p>
   <h3>Fees</h3>
   <div *ngFor="let fee of campgroundInfo.fees">
     <h4>{{fee.title}}</h4>
@@ -25,7 +27,7 @@
   </div>
   <p>{{ campgroundInfo.description }}</p>
   <h3>Reservations</h3>
-  <p>{{campgroundInfo.reservationInfo}}</p>
+  <p [innerHTML]="campgroundInfo.reservationInfo">{{campgroundInfo.reservationInfo}}</p>
   <a href="{{campgroundInfo.reservationUrl}}" *ngIf="campgroundInfo.reservationUrl">Make a Reservation</a>
   <p>Number of Available Sites: {{campgroundInfo.numberOfSitesReservable}}</p>
   <p>HORSES??!!: {{campgroundInfo.campsites.horse}}</p>
