@@ -32,7 +32,7 @@
   <div class="activities-list-container">
     <h3>Amenities</h3>
     <ul>
-      <li>Ampitheater: {{ campgroundInfo.amenities.ampitheater }}</li>
+      <li>Amphitheater: {{ campgroundInfo.amenities.amphitheater }}</li>
       <li>Showers: {{ campgroundInfo.amenities.showers }}</li>
       <li>Toilets: {{ campgroundInfo.amenities.toilets }}</li>
       <li>Laundry: {{ campgroundInfo.amenities.laundry }}</li>
@@ -51,12 +51,12 @@
     <p>Overview: {{campgroundInfo.weatherOverview}}</p>
 
     <h3>Accessibility</h3>
-    <p>{{campgroundInfo.wheelchairAccess}}</p>
-    <p>{{campgroundInfo.adaInfo}}</p>
+    <p>{{campgroundInfo.accessibility.wheelchairAccess}}</p>
+    <p>{{campgroundInfo.accessibility.adaInfo}}</p>
 
     <h3>More Info</h3>
-    <p> <b>Fires:</b> {{campgroundInfo.fireStovePolicy}}</p>
-    <p> <b>RVs:</b> {{campgroundInfo.rvInfo}}</p>
+    <p> <b>Fires:</b> {{campgroundInfo.accessibility.fireStovePolicy}}</p>
+    <p> <b>RVs:</b> {{campgroundInfo.accessibility.rvInfo}}</p>
 
     <a href="#" routerLink="/trail-info">Get Trails</a>
     <a href="#" routerLink="/campground-info">Get Campsites</a>
