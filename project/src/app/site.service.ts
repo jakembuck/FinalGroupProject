@@ -24,6 +24,8 @@ export class SiteService {
   limit: any = 20;
   // lat: any;
   // lon: any;
+  DefLatitude: any = 43.590926;
+  DefLongitude: any = -84.716219;
   constructor(private http: HttpClient) { }
 
 
@@ -73,6 +75,16 @@ export class SiteService {
       },
     });
   }
+  getDefaultTrails(): any {
+    return this.http.get(this.trailLocationUrl, {
+      params: {
+        key: this.hikingTrailsKey,
+        lat: this.DefLatitude,
+        lon: this.DefLongitude
+      }
+    })
+  }
+
   getGeocode(q: any): any {
     return this.http.get(this.geocodeURL, {
       params: {

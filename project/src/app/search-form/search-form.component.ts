@@ -275,11 +275,13 @@ export class SearchFormComponent implements OnInit {
         keyTerm = `${response.q} ${stateObj.name}`
       } else if (response.q) {
         keyTerm = response.q
-      } else {
+      } else if (response.state) {
         stateObj = this.states.find(state => {
           return state.sc === response.state
         })
-        keyTerm = stateObj.name
+        keyTerm = stateObj["name"]
+      } else if (!response.q && !response.state) {
+        keyTerm = "";
       }
       this.service.getGeocode(keyTerm).subscribe(response => {
         console.log(response.results[0].geometry.location)

@@ -40,5 +40,14 @@ export class ParksInfoComponent implements OnInit {
     //   });
   }
 
+  getParkTrails(parkInfo: any) {
+    this.router.navigate(["/trails"], {
+      queryParams: {
+        lat: parkInfo.latitude,
+        lon: parkInfo.longitude
+      }
+    })
+  }
+
 
 };
