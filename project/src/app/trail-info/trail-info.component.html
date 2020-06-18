@@ -1,1 +1,12 @@
-<p>trail-info works!</p>
+<div class="trail-info-container" *ngFor="let trailInfo of trailInfoPageArray">
+    <!-- <img src="{{ trailInfo.imgSqSmall}}"> -->
+    <h1 class="trail-info-title">{{trailInfo.name}}</h1>
+    <h2>{{ trailInfo.location }}</h2>
+    <h3>Difficulty: {{ trailInfo.difficulty }}</h3>
+    <h4>{{ trailInfo.length }} miles </h4>
+    <p>{{ trailInfo.stars }} out of 5 stars</p>
+    <p>trail status: {{ trailInfo.conditionStatus }}</p>
+    <p>trail weather: {{ trailInfo.conditionDetails }}</p>
+    <p>status as of {{ trailInfo.conditionDate }}</p>
+    <p></p>
+</div>
