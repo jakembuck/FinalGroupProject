@@ -275,10 +275,40 @@ export class TrailsComponent implements OnInit {
       if (response.lon && response.lat) {
         this.service.getTrails(response.lat, response.lon).subscribe(response => {
           this.trailsArray = response.trails;
+          this.markers = [];
+          this.trailsArray.forEach(trail => {
+            console.log(trail);
+            this.markers.push({
+              info: { title: trail.name },
+              position: new google.maps.LatLng({
+                lat: Number(trail.latitude),
+                lng: Number(trail.longitude)
+              })
+            })
+          });
         })
       } else {
         this.service.getDefaultTrails().subscribe(response => {
           this.trailsArray = response.trails;
+          this.markers = [];
+          this.trailsArray.forEach(trail => {
+            console.log(trail);
+            this.markers.push({
+              info: { title: trail.name },
+              position: new google.maps.LatLng({
+                lat: Number(trail.latitude),
+                lng: Number(trail.longitude)
+              })
+            })
+          });
+          let keyTerm = "mt. pleasant, mi"
+          this.service.getGeocode(keyTerm).subscribe(response => {
+            console.log(response.results[0].geometry.location)
+            this.center = new google.maps.LatLng({
+              lat: response.results[0].geometry.location.lat,
+              lng: response.results[0].geometry.location.lng
+            });
+          });
         });
       }
     })
@@ -288,7 +318,7 @@ export class TrailsComponent implements OnInit {
     // this.getParkTrails(this.lat, this.lon);
     // console.log(longitude);
     // this.service.getParks(response.q, response.state).subscribe((response) => {
-    this.route.queryParams.subscribe((response => {
+    this.route.queryParams.subscribe(response => {
       console.log(response)
       this.zoom = 6;
       let keyTerm: string = null;
@@ -330,41 +360,24 @@ export class TrailsComponent implements OnInit {
         this.trailsCoordArray.forEach(coord => {
           this.service.getTrails(coord.lat, coord.lon).subscribe(response => {
             this.trailsArray = response.trails;
+            this.markers = [];
+            this.trailsArray.forEach(trail => {
+              console.log(trail);
+              this.markers.push({
+                info: { title: trail.name },
+                position: new google.maps.LatLng({
+                  lat: Number(trail.latitude),
+                  lng: Number(trail.longitude)
+                })
+              })
+            });
           })
         })
         console.log(this.trailsArray);
         //end new stuff
       });
-
-      //     this.service.getTrails(this.lat, this.lon).subscribe(response => {
-
-      //       this.trailsArray = response.trails;
-      //       console.log(this.trailsArray);
-      //       this.markers = [];
-      //       this.route.queryParams.subscribe(response => {
-      //         console.log(response)
-      //         this.zoom = 6;
-      //         this.parkInfoPageArray = this.service.parkInfoPageArray;
-
-      //     console.log(this.parkInfoPageArray);
-      //     this.lat = this.parkInfoPageArray[0].latitude;
-      //     this.lon = this.parkInfoPageArray[0].longitude;
-      //     this.trailsArray.forEach(trail => {
-      //       console.log(trail);
-      //       this.markers.push({
-      //         info: { title: trail.name },
-      //         position: new google.maps.LatLng({
-      //           lat: Number(trail.latitude),
-      //           lng: Number(trail.longitude)
-      //         })
-      //       })
-      //     });
-      //     })
-      //   });
-      // }));
-    }));
+    })
   }
-
 
 
 
@@ -394,4 +407,3 @@ export class TrailsComponent implements OnInit {
   //   }
   // }
 };
-
