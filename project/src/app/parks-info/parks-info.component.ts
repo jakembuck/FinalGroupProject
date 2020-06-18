@@ -49,5 +49,14 @@ export class ParksInfoComponent implements OnInit {
     })
   }
 
+  getParkCampgrounds(parkInfo: any) {
+    console.log(parkInfo.name, parkInfo.addresses[0].stateCode);
+    this.router.navigate(["/campgrounds"], {
+      queryParams: {
+        q: parkInfo.name,
+        sc: parkInfo.addresses[0].stateCode
+      }
+    })
+  }
 
 };

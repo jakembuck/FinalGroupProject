@@ -269,7 +269,7 @@ export class CampgroundsComponent implements OnInit {
     //     console.log(campResponse.data);
     //   })
     // })
-    this.getDefaultCampgrounds();
+    // this.getDefaultCampgrounds();
     this.route.queryParams.subscribe(response => {
       console.log(response)
       this.zoom = 6;
@@ -297,6 +297,8 @@ export class CampgroundsComponent implements OnInit {
           lng: response.results[0].geometry.location.lng
         });
       });
+
+      //GET CAMPSITE WILL WORK IF RESPONSE.SC
       this.service.getCampgrounds(response.q, response.state).subscribe(response => {
         this.campgroundsArray = response.data;
         console.log(this.campgroundsArray);
