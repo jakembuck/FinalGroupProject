@@ -26,6 +26,7 @@ export class TrailsComponent implements OnInit {
   lon: any = null;
   label: any;
   infoContent: any;
+  trailsCoordArray: any = [];
 
 
   states: any[] = [
@@ -317,38 +318,52 @@ export class TrailsComponent implements OnInit {
       this.service.getParks(response.q, response.state).subscribe((response) => {
         this.parksList = response.data;
         console.log(this.parksList);
+        //new stuff
+        this.parksList.forEach(park => {
+          this.trailsCoordArray.push({
+            lat: park.latitude,
+            lon: park.longitude
+          })
 
+        })
+        console.log(this.trailsCoordArray);
+        this.trailsCoordArray.forEach(coord => {
+          this.service.getTrails(coord.lat, coord.lon).subscribe(response => {
+            this.trailsArray = response.trails;
+          })
+        })
+        console.log(this.trailsArray);
+        //end new stuff
       });
 
-      this.service.getTrails(this.lat, this.lon).subscribe(response => {
-        //adding probs need to delete
-        console.log(this.parksList);
-        this.trailsArray = response.trails;
-        console.log(this.trailsArray);
-        this.markers = [];
-        this.route.queryParams.subscribe(response => {
-          console.log(response)
-          this.zoom = 6;
-          this.parkInfoPageArray = this.service.parkInfoPageArray;
+      //     this.service.getTrails(this.lat, this.lon).subscribe(response => {
 
-          // console.log(this.parkInfoPageArray);
-          this.lat = this.parkInfoPageArray[0].latitude;
-          // console.log(this.lat);
-          this.lon = this.parkInfoPageArray[0].longitude;
-          // this.trailsArray.forEach(trail => {
-          //   console.log(trail);
-          //   this.markers.push({
-          //     info: { title: trail.name },
-          //     position: new google.maps.LatLng({
-          //       lat: Number(trail.latitude),
-          //       lng: Number(trail.longitude)
-          //     })
-          //   })
-          // });
-        })
-      })
+      //       this.trailsArray = response.trails;
+      //       console.log(this.trailsArray);
+      //       this.markers = [];
+      //       this.route.queryParams.subscribe(response => {
+      //         console.log(response)
+      //         this.zoom = 6;
+      //         this.parkInfoPageArray = this.service.parkInfoPageArray;
+
+      //     console.log(this.parkInfoPageArray);
+      //     this.lat = this.parkInfoPageArray[0].latitude;
+      //     this.lon = this.parkInfoPageArray[0].longitude;
+      //     this.trailsArray.forEach(trail => {
+      //       console.log(trail);
+      //       this.markers.push({
+      //         info: { title: trail.name },
+      //         position: new google.maps.LatLng({
+      //           lat: Number(trail.latitude),
+      //           lng: Number(trail.longitude)
+      //         })
+      //       })
+      //     });
+      //     })
+      //   });
+      // }));
     }));
-  };
+  }
 
 
 
