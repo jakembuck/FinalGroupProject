@@ -51,7 +51,7 @@ export class MainPageComponent implements OnInit {
   }
 
   getTrails(park): any {
-    this.service.getTrails(park.latitude, park.longitude).subscribe(response => {
+    this.service.getTrails(park).subscribe(response => {
       console.log(response);
       this.data = response;
     })

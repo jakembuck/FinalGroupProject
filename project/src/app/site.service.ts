@@ -31,16 +31,21 @@ export class SiteService {
 
 
 
-  getParks(q: string, sc: string): any {
+  getParks(campObj: any): any {
+    let params: any = {}
+    params.api_key = this.parksKey;
+    params.limit = "200";
+    if (campObj.q) {
+      params.q = campObj.q
+    }
+    if (campObj.state) {
+      params.stateCode = campObj.state
+    }
     return this.http.get(this.parksEndpoint, {
-      params: {
-        q: q,
-        api_key: this.parksKey,
-        stateCode: sc,
-        limit: this.limit
-      }
+      params: params
     });
-  }
+  };
+
   getCampgrounds(q: string, sc: string): any {
     return this.http.get(this.campgroundsEndpoint, {
       params: {
@@ -100,15 +105,29 @@ export class SiteService {
       }
     });
   }
-  getTrails(latitude: any, longitude: any): any {
+  getTrails(trailObj: any): any {
+    console.log(trailObj);
+    let params: any = {}
+    params.key = this.hikingTrailsKey;
+    params.maxResults = this.maxResults;
+    if (trailObj.lat) {
+      params.lat = trailObj.lat
+    }
+    if (trailObj.lng) {
+      params.lon = trailObj.lng
+    }
+    console.log(params);
     return this.http.get(this.trailLocationUrl, {
-      params: {
-        key: this.hikingTrailsKey,
-        lat: latitude,
-        lon: longitude,
-        maxResults: this.maxResults
-      },
+      params: params
     });
+    // return this.http.get(this.trailLocationUrl, {
+    //   params: {
+    //     key: this.hikingTrailsKey,
+    //     lat: latitude,
+    //     lon: longitude,
+    //     maxResults: this.maxResults
+    //   },
+    // });
   }
   getDefaultTrails(): any {
     return this.http.get(this.trailLocationUrl, {
@@ -153,5 +172,14 @@ export class SiteService {
   getCampgroundInfoArray(): any {
     return this.campgroundInfoPageArray
   }
+  getDefaultParks(): any {
+    return this.http.get(this.parksEndpoint, {
+      params: {
+        api_key: this.parksKey,
+        stateCode: "MI",
+        limit: "200"
+      }
+    });
+  };
 
 }

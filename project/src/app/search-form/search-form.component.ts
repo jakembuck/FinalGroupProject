@@ -264,7 +264,6 @@ export class SearchFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(response => {
-      console.log(response)
       this.zoom = 8;
       let keyTerm: string = null;
       let stateObj: any = null
@@ -284,14 +283,13 @@ export class SearchFormComponent implements OnInit {
         keyTerm = "";
       }
       this.service.getGeocode(keyTerm).subscribe(response => {
-        console.log(response.results[0].geometry.location)
         this.center = new google.maps.LatLng({
           lat: response.results[0].geometry.location.lat,
           lng: response.results[0].geometry.location.lng
         });
       })
 
-      this.service.getParks(response.q, response.state).subscribe(response => {
+      this.service.getParks(response).subscribe(response => {
         this.parksList = response.data;
         // console.log(this.parksList);
         this.markers = [];
@@ -310,59 +308,45 @@ export class SearchFormComponent implements OnInit {
 
   openInfo(marker: MapMarker, content: any) {
     this.infoContent = content;
-    console.log(marker, content);
     this.info.open(marker)
   }
 
   submitForm(form: NgForm) {
     this.route.url.subscribe(response => {
+      let params: any = {}
+      if (form.value.search) {
+        params.q = form.value.search
+      }
+      if (form.value.stateSearch) {
+        params.state = form.value.stateSearch
+      }
       if (response[0].path === "main-page") {
         this.router.navigate(["/search-list"], {
-          queryParams: {
-            // can change name of state and "q"
-            q: form.value.search,
-            state: form.value.stateSearch
-          }
+          queryParams: params
         })
       } else if (response[0].path === "search-list") {
         this.router.navigate(["/search-list"], {
-          queryParams: {
-            // can change name of state and "q"
-            q: form.value.search,
-            state: form.value.stateSearch
-          }
+          queryParams: params
         })
       } else if (response[0].path === "campgrounds") {
         this.router.navigate(["/campgrounds"], {
-          queryParams: {
-            // can change name of state and "q"
-            q: form.value.search,
-            state: form.value.stateSearch
-          }
+          queryParams: params
         })
       } else if (response[0].path === "trails") {
         this.router.navigate(["/trails"], {
-          queryParams: {
-            // can change name of state and "q"
-            q: form.value.search,
-            state: form.value.stateSearch
-          }
+          queryParams: params
         })
       }
       else if (response[0].path === "parks") {
         this.router.navigate(["/parks"], {
-          queryParams: {
-            // can change name of state and "q"
-            q: form.value.search,
-            state: form.value.stateSearch
-          }
+          queryParams: params
         })
       }
     })
     console.log(form.value);
   }
   getTrails(park): any {
-    this.service.getTrails(park.latitude, park.longitude).subscribe(response => {
+    this.service.getTrails(park).subscribe(response => {
       // console.log(response);
       this.data = response;
     })

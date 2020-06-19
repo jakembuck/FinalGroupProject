@@ -263,12 +263,11 @@ export class SearchListComponent implements OnInit {
   constructor(private service: SiteService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.route.url.subscribe(response => {
-      console.log(response)
-    })
+    // this.route.url.subscribe(response => {
+    //   console.log(response)
+    // })
 
     this.route.queryParams.subscribe(response => {
-      console.log(response)
       this.zoom = 6;
       let keyTerm: string = null;
       let stateObj: any = null
@@ -290,14 +289,13 @@ export class SearchListComponent implements OnInit {
 
 
       this.service.getGeocode(keyTerm).subscribe(response => {
-        console.log(response.results[0].geometry.location)
         this.center = new google.maps.LatLng({
           lat: response.results[0].geometry.location.lat,
           lng: response.results[0].geometry.location.lng
         });
       })
 
-      this.service.getParks(response.q, response.state).subscribe(response => {
+      this.service.getParks(response).subscribe(response => {
         this.parksList = response.data;
         this.markers = [];
         this.parksList.forEach(park => {
@@ -315,12 +313,10 @@ export class SearchListComponent implements OnInit {
 
   openInfo(marker: MapMarker, content: any) {
     this.infoContent = content;
-    console.log(marker, content);
     this.info.open(marker)
   }
 
   submitForm(form: NgForm) {
-    console.log(form.value)
     this.router.navigate(["/search-list"], {
       queryParams: {
         // can change name of state and "q"
@@ -332,8 +328,7 @@ export class SearchListComponent implements OnInit {
 
   }
   getTrails(park): any {
-    this.service.getTrails(park.latitude, park.longitude).subscribe(response => {
-      console.log(response);
+    this.service.getTrails(park).subscribe(response => {
       this.data = response;
     })
   }

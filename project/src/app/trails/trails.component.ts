@@ -13,21 +13,13 @@ export class TrailsComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap
   @ViewChild(MapInfoWindow, { static: false }) info: MapInfoWindow
   trailsArray = [];
-  trailsLat: any;
-  trailsLon: any;
-  parksList: any = [];
   parkInfoPageArray: any = [];
-  data: any;
   zoom: any;
   center: any;
   markers: any = [];
   title: any;
-  lat: any = null;
-  lon: any = null;
   label: any;
   infoContent: any;
-  trailsCoordArray: any = [];
-
 
   states: any[] = [
     {
@@ -272,7 +264,6 @@ export class TrailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(response => {
-      console.log(response)
       this.zoom = 6;
       let keyTerm: string = null;
       let stateObj: any = null
@@ -281,101 +272,63 @@ export class TrailsComponent implements OnInit {
           return state.sc === response.state
         })
         keyTerm = `${response.q} ${stateObj.name}`
-        this.service.getGeocode(keyTerm).subscribe(response => {
-          let lat = response.results[0].geometry.location.lat;
-          let lng = response.results[0].geometry.location.lng;
-          this.center = new google.maps.LatLng({
-            lat: lat,
-            lng: lng
-          });
-          this.service.getTrails(lat, lng).subscribe(response => {
-            console.log(response);
-            this.trailsArray = response.trails;
-            console.log(this.trailsArray);
-            this.markers = [];
-            this.trailsArray.forEach(trail => {
-              console.log(trail);
-              this.markers.push({
-                info: { title: trail.name },
-                position: new google.maps.LatLng({
-                  lat: Number(trail.latitude),
-                  lng: Number(trail.longitude)
-                })
-              })
-            });
-          })
-        });
-        // all the stuff related to q & sc
+        this.setCenterAndGetTrails(keyTerm);
 
       } else if (response.q) {
-        keyTerm = response.q
-      } else if (response.sc) {
+        this.setCenterAndGetTrails(response.q);
+
+      } else if (response.state) {
         stateObj = this.states.find(state => {
           return state.sc === response.state
         })
         keyTerm = stateObj.name
-      } else if (!response.q && !response.sc) {
+        this.setCenterAndGetTrails(keyTerm);
+
+      } else if (!response.q && !response.state) {
         keyTerm = "mt.pleasant, Michigan"
-        this.service.getGeocode(keyTerm).subscribe(response => {
-          console.log(response.results[0].geometry.location)
-          this.center = new google.maps.LatLng({
-            lat: response.results[0].geometry.location.lat,
-            lng: response.results[0].geometry.location.lng
-          });
-        });
-        console.log("happened");
-        this.service.getDefaultTrails()
-      }
-
-      //GET CAMPSITE WILL WORK IF RESPONSE.SC
-      if (response.q && response.state) {
-
-      } else {
-        this.service.getTrails(response.q, response.state).subscribe(response => {
-          this.trailsArray = response.trails;
-          console.log(this.trailsArray);
-          this.markers = [];
-          this.trailsArray.forEach(trail => {
-            console.log(trail);
-            this.markers.push({
-              info: { title: trail.name },
-              position: new google.maps.LatLng({
-                lat: Number(trail.latitude),
-                lng: Number(trail.longitude)
-              })
-            })
-          });
-        })
+        this.setCenterAndGetTrails(keyTerm);
       }
     });
-  }
-
+  };
 
 
   addToTrailInfo(trail): any {
     trail.isclicked === true
     this.service.addToTrailInfo(trail)
   }
+
   openInfo(marker: MapMarker, content: any) {
     this.infoContent = content;
-    console.log(marker, content);
     this.info.open(marker)
   }
+  getTrails(params: any) {
+    console.log(params);
+    this.service.getTrails(params).subscribe(response => {
+      console.log(response);
+      this.trailsArray = response.trails;
+      this.markers = [];
+      this.trailsArray.forEach(trail => {
+        this.markers.push({
+          info: { title: trail.name },
+          position: new google.maps.LatLng({
+            lat: Number(trail.latitude),
+            lng: Number(trail.longitude)
+          })
+        })
+      });
+    })
+  }
 
+  setCenterAndGetTrails(location: any) {
+    this.service.getGeocode(location).subscribe(response => {
+      let lat = response.results[0].geometry.location.lat
+      let lng = response.results[0].geometry.location.lng
+      this.center = new google.maps.LatLng({
+        lat: lat,
+        lng: lng
+      });
+      this.getTrails({ lat: lat, lng: lng });
+    });
+  }
 
-  // getParkTrails(lat, lon) {
-  //   if (this.parkInfoPageArray) {
-  //     this.parkInfoPageArray = this.service.parkInfoPageArray;
-  //     lat = this.parkInfoPageArray[0].latitude;
-  //     console.log(this.parkInfoPageArray[0].latitude);
-  //     lon = this.parkInfoPageArray[0].longitude;
-  //     this.service.getTrails(lat, lon).subscribe(response => {
-  //       this.trailsArray = response.trails
-
-  //     })
-  //   }
-  //   else {
-  //     this.parkInfoPageArray = [];
-  //   }
-  // }
 };

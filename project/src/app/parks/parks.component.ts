@@ -263,16 +263,8 @@ export class ParksComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.route.queryParams.subscribe(response => {
-    //   this.service.getparks(response.q, response.sc).subscribe(campResponse => {
-    //     this.parksArray = campResponse.data;
-    //     console.log(campResponse.data);
-    //   })
-    // })
-    this.getDefaultParks()
     this.route.queryParams.subscribe(response => {
-      console.log(response)
-      this.zoom = 4;
+      this.zoom = 6;
       let keyTerm: string = null;
       let stateObj: any = null
       if (response.q && response.state) {
@@ -280,59 +272,156 @@ export class ParksComponent implements OnInit {
           return state.sc === response.state
         })
         keyTerm = `${response.q} ${stateObj.name}`
+        this.setCenter(keyTerm);
+
+        this.getParks(response);
       } else if (response.q) {
-        keyTerm = response.q
+        this.setCenter(response.q);
+
+        this.getParks(response);
       } else if (response.state) {
         stateObj = this.states.find(state => {
           return state.sc === response.state
         })
         keyTerm = stateObj.name
-      } else if (response.q == null && response.state == null) {
-        keyTerm = ""
+        this.setCenter(keyTerm);
+
+        this.getParks(response);
+      } else if (!response.q && !response.state) {
+        keyTerm = "mt.pleasant, Michigan"
+        this.setCenter(keyTerm);
+        this.getDefaultParks()
       }
-      this.service.getGeocode(keyTerm).subscribe(response => {
-        console.log(response.results[0].geometry.location)
-        this.center = new google.maps.LatLng({
-          lat: response.results[0].geometry.location.lat,
-          lng: response.results[0].geometry.location.lng
-        });
-      });
-      this.service.getParks(response.q, response.state).subscribe(response => {
-        this.parksArray = response.data;
-        console.log(this.parksArray);
-        this.markers = [];
-        this.parksArray.forEach(park => {
-          console.log(park);
-          this.markers.push({
-            info: { title: park.name },
-            position: new google.maps.LatLng({
-              lat: Number(park.latitude),
-              lng: Number(park.longitude)
-            })
-          })
-        });
-      })
     });
   };
 
   getDefaultParks() {
-    this.router.navigate(["/parks"], {
-      queryParams: {
-        // can change name of state and "q"
-        q: "",
-        state: ""
-      }
+    this.service.getDefaultParks().subscribe(response => {
+      this.parksArray = response.data;
+      this.markers = [];
+      this.parksArray.forEach(campground => {
+        this.markers.push({
+          info: { title: campground.name },
+          position: new google.maps.LatLng({
+            lat: Number(campground.latitude),
+            lng: Number(campground.longitude)
+          })
+        })
+      });
+
     })
   }
 
-  addToParkInfo(park): any {
-    park.isclicked === true
-    this.service.addToParkInfo(park)
+  addToParkInfo(campground): any {
+    campground.isclicked === true
+    this.service.addToParkInfo(campground)
   }
 
   openInfo(marker: MapMarker, content: any) {
     this.infoContent = content;
-    console.log(marker, content);
     this.info.open(marker)
   }
+  getParks(params: any) {
+    this.service.getParks(params).subscribe(response => {
+      this.parksArray = response.data;
+      this.markers = [];
+      this.parksArray.forEach(park => {
+        this.markers.push({
+          info: { title: park.name },
+          position: new google.maps.LatLng({
+            lat: Number(park.latitude),
+            lng: Number(park.longitude)
+          })
+        })
+      });
+    })
+  }
+
+  setCenter(location: any) {
+    this.service.getGeocode(location).subscribe(response => {
+      this.center = new google.maps.LatLng({
+        lat: response.results[0].geometry.location.lat,
+        lng: response.results[0].geometry.location.lng
+      });
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  //   this.getDefaultParks()
+  //   this.route.queryParams.subscribe(response => {
+  //     console.log(response)
+  //     this.zoom = 4;
+  //     let keyTerm: string = null;
+  //     let stateObj: any = null
+  //     if (response.q && response.state) {
+  //       stateObj = this.states.find(state => {
+  //         return state.sc === response.state
+  //       })
+  //       keyTerm = `${response.q} ${stateObj.name}`
+  //     } else if (response.q) {
+  //       keyTerm = response.q
+  //     } else if (response.state) {
+  //       stateObj = this.states.find(state => {
+  //         return state.sc === response.state
+  //       })
+  //       keyTerm = stateObj.name
+  //     } else if (response.q == null && response.state == null) {
+  //       keyTerm = ""
+  //     }
+  //     this.service.getGeocode(keyTerm).subscribe(response => {
+  //       console.log(response.results[0].geometry.location)
+  //       this.center = new google.maps.LatLng({
+  //         lat: response.results[0].geometry.location.lat,
+  //         lng: response.results[0].geometry.location.lng
+  //       });
+  //     });
+  //     this.service.getParks(response.q, response.state).subscribe(response => {
+  //       this.parksArray = response.data;
+  //       console.log(this.parksArray);
+  //       this.markers = [];
+  //       this.parksArray.forEach(park => {
+  //         console.log(park);
+  //         this.markers.push({
+  //           info: { title: park.name },
+  //           position: new google.maps.LatLng({
+  //             lat: Number(park.latitude),
+  //             lng: Number(park.longitude)
+  //           })
+  //         })
+  //       });
+  //     })
+  //   });
+  // };
+
+  // getDefaultParks() {
+  //   this.router.navigate(["/parks"], {
+  //     queryParams: {
+  //       // can change name of state and "q"
+  //       q: "",
+  //       state: ""
+  //     }
+  //   })
+  // }
+
+  // addToParkInfo(park): any {
+  //   park.isclicked === true
+  //   this.service.addToParkInfo(park)
+  // }
+
+  // openInfo(marker: MapMarker, content: any) {
+  //   this.infoContent = content;
+  //   console.log(marker, content);
+  //   this.info.open(marker)
+  // }
 };

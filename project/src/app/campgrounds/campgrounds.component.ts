@@ -263,15 +263,7 @@ export class CampgroundsComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.route.queryParams.subscribe(response => {
-    //   this.service.getCampgrounds(response.q, response.sc).subscribe(campResponse => {
-    //     this.campgroundsArray = campResponse.data;
-    //     console.log(campResponse.data);
-    //   })
-    // })
-    // this.getDefaultCampgrounds();
     this.route.queryParams.subscribe(response => {
-      console.log(response)
       this.zoom = 6;
       let keyTerm: string = null;
       let stateObj: any = null
@@ -280,72 +272,25 @@ export class CampgroundsComponent implements OnInit {
           return state.sc === response.state
         })
         keyTerm = `${response.q} ${stateObj.name}`
-        this.service.getGeocode(keyTerm).subscribe(response => {
-          console.log(response.results[0].geometry.location)
-          this.center = new google.maps.LatLng({
-            lat: response.results[0].geometry.location.lat,
-            lng: response.results[0].geometry.location.lng
-          });
-        });
-        // all the stuff related to q & sc
-        this.service.getParkCampgrounds(response).subscribe(response => {
-          this.campgroundsArray = response.data;
-          console.log(this.campgroundsArray);
-          this.markers = [];
-          this.campgroundsArray.forEach(campground => {
-            console.log(campground);
-            this.markers.push({
-              info: { title: campground.name },
-              position: new google.maps.LatLng({
-                lat: Number(campground.latitude),
-                lng: Number(campground.longitude)
-              })
-            })
-          });
-        })
+        this.setCenter(keyTerm);
+
+        this.getParkCampgrounds(response);
       } else if (response.q) {
-        this.service.getGeocode(response.q).subscribe(response => {
-          this.center = new google.maps.LatLng({
-            lat: response.results[0].geometry.location.lat,
-            lng: response.results[0].geometry.location.lng
-          });
-        })
-      } else if (response.sc) {
+        this.setCenter(response.q);
+
+        this.getParkCampgrounds(response);
+      } else if (response.state) {
         stateObj = this.states.find(state => {
           return state.sc === response.state
         })
         keyTerm = stateObj.name
-      } else if (!response.q && !response.sc) {
-        keyTerm = "mt.pleasant, Michigan"
-        this.service.getGeocode(keyTerm).subscribe(response => {
-          console.log(response.results[0].geometry.location)
-          this.center = new google.maps.LatLng({
-            lat: response.results[0].geometry.location.lat,
-            lng: response.results[0].geometry.location.lng
-          });
-        });
-        console.log("happened");
-        this.getDefaultCampgrounds()
-      }
+        this.setCenter(keyTerm);
 
-      //GET CAMPSITE WILL WORK IF RESPONSE.SC
-      if (response.q && response.sc) {
-      } else {
-        this.service.getCampgrounds(response.q, response.state).subscribe(response => {
-          this.campgroundsArray = response.data;
-          console.log(this.campgroundsArray);
-          this.markers = [];
-          this.campgroundsArray.forEach(campground => {
-            console.log(campground);
-            this.markers.push({
-              info: { title: campground.name },
-              position: new google.maps.LatLng({
-                lat: Number(campground.latitude),
-                lng: Number(campground.longitude)
-              })
-            })
-          });
-        })
+        this.getParkCampgrounds(response);
+      } else if (!response.q && !response.state) {
+        keyTerm = "mt.pleasant, Michigan"
+        this.setCenter(keyTerm);
+        this.getDefaultCampgrounds()
       }
     });
   };
@@ -355,7 +300,6 @@ export class CampgroundsComponent implements OnInit {
       this.campgroundsArray = response.data;
       this.markers = [];
       this.campgroundsArray.forEach(campground => {
-        console.log(campground);
         this.markers.push({
           info: { title: campground.name },
           position: new google.maps.LatLng({
@@ -375,7 +319,30 @@ export class CampgroundsComponent implements OnInit {
 
   openInfo(marker: MapMarker, content: any) {
     this.infoContent = content;
-    console.log(marker, content);
     this.info.open(marker)
+  }
+  getParkCampgrounds(params: any) {
+    this.service.getParkCampgrounds(params).subscribe(response => {
+      this.campgroundsArray = response.data;
+      this.markers = [];
+      this.campgroundsArray.forEach(campground => {
+        this.markers.push({
+          info: { title: campground.name },
+          position: new google.maps.LatLng({
+            lat: Number(campground.latitude),
+            lng: Number(campground.longitude)
+          })
+        })
+      });
+    })
+  }
+
+  setCenter(location: any) {
+    this.service.getGeocode(location).subscribe(response => {
+      this.center = new google.maps.LatLng({
+        lat: response.results[0].geometry.location.lat,
+        lng: response.results[0].geometry.location.lng
+      });
+    });
   }
 };

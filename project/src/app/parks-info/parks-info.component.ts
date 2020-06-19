@@ -41,10 +41,11 @@ export class ParksInfoComponent implements OnInit {
   }
 
   getParkTrails(parkInfo: any) {
+    console.log(parkInfo);
     this.router.navigate(["/trails"], {
       queryParams: {
-        lat: parkInfo.latitude,
-        lon: parkInfo.longitude
+        q: parkInfo.name,
+        state: parkInfo.addresses[0].stateCode
       }
     })
   }
@@ -54,7 +55,7 @@ export class ParksInfoComponent implements OnInit {
     this.router.navigate(["/campgrounds"], {
       queryParams: {
         q: parkInfo.name,
-        sc: parkInfo.addresses[0].stateCode
+        state: parkInfo.addresses[0].stateCode
       }
     })
   }
