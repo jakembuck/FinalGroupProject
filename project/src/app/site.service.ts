@@ -50,6 +50,25 @@ export class SiteService {
       }
     });
   };
+  getParkCampgrounds(q: string, sc: string): any {
+    return this.http.get(this.campgroundsEndpoint, {
+      params: {
+        q: q,
+        api_key: this.parksKey,
+        stateCode: sc,
+        limit: this.limit
+      }
+    });
+  };
+  getDefaultCampgrounds(): any {
+    return this.http.get(this.campgroundsEndpoint, {
+      params: {
+        api_key: this.parksKey,
+        stateCode: "MI",
+        limit: "200"
+      }
+    });
+  };
   getAlerts(q: string): any {
     return this.http.get(this.alertsEndpoint, {
       params: {
