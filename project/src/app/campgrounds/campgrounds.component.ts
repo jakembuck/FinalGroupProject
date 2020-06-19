@@ -275,9 +275,9 @@ export class CampgroundsComponent implements OnInit {
       this.zoom = 6;
       let keyTerm: string = null;
       let stateObj: any = null
-      if (response.q && response.sc) {
+      if (response.q && response.state) {
         stateObj = this.states.find(state => {
-          return state.sc === response.sc
+          return state.sc === response.state
         })
         keyTerm = `${response.q} ${stateObj.name}`
         this.service.getGeocode(keyTerm).subscribe(response => {
@@ -288,7 +288,7 @@ export class CampgroundsComponent implements OnInit {
           });
         });
         // all the stuff related to q & sc
-        this.service.getParkCampgrounds(response.q, response.sc).subscribe(response => {
+        this.service.getParkCampgrounds(response).subscribe(response => {
           this.campgroundsArray = response.data;
           console.log(this.campgroundsArray);
           this.markers = [];
@@ -304,7 +304,12 @@ export class CampgroundsComponent implements OnInit {
           });
         })
       } else if (response.q) {
-        keyTerm = response.q
+        this.service.getGeocode(response.q).subscribe(response => {
+          this.center = new google.maps.LatLng({
+            lat: response.results[0].geometry.location.lat,
+            lng: response.results[0].geometry.location.lng
+          });
+        })
       } else if (response.sc) {
         stateObj = this.states.find(state => {
           return state.sc === response.state

@@ -51,14 +51,28 @@ export class SiteService {
       }
     });
   };
-  getParkCampgrounds(q: string, sc: string): any {
+  // getParkCampgrounds(q: string, sc: string): any {
+  //   return this.http.get(this.campgroundsEndpoint, {
+  //     params: {
+  //       q: q,
+  //       api_key: this.parksKey,
+  //       stateCode: sc,
+  //       limit: this.limit
+  //     }
+  //   });
+  // };
+  getParkCampgrounds(campObj: any): any {
+    let params: any = {}
+    params.api_key = this.parksKey;
+    params.limit = "200";
+    if (campObj.q) {
+      params.q = campObj.q
+    }
+    if (campObj.state) {
+      params.stateCode = campObj.state
+    }
     return this.http.get(this.campgroundsEndpoint, {
-      params: {
-        q: q,
-        api_key: this.parksKey,
-        stateCode: sc,
-        limit: this.limit
-      }
+      params: params
     });
   };
   getDefaultCampgrounds(): any {
@@ -107,7 +121,7 @@ export class SiteService {
     })
   }
 
-  getGeocode(q: any): any {
+  getGeocode(q: string): any {
     return this.http.get(this.geocodeURL, {
       params: {
         address: q,
