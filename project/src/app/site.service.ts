@@ -16,6 +16,7 @@ export class SiteService {
   parkInfoPageArray: any = [];
   campgroundInfoPageArray: any = [];
   trailInfoPageArray: any = [];
+  maxResults: any = 50;
 
   // hiking trails 
   hikingTrailsKey: string = "200802785-232f5acce6a2f23888902edffe9f1bcf";
@@ -90,7 +91,8 @@ export class SiteService {
       params: {
         key: this.hikingTrailsKey,
         lat: latitude,
-        lon: longitude
+        lon: longitude,
+        maxResults: this.maxResults
       },
     });
   }
@@ -99,7 +101,8 @@ export class SiteService {
       params: {
         key: this.hikingTrailsKey,
         lat: this.DefLatitude,
-        lon: this.DefLongitude
+        lon: this.DefLongitude,
+        maxResults: this.maxResults
       }
     })
   }

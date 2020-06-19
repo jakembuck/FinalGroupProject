@@ -272,12 +272,15 @@ export class TrailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((response) => {
+
       if (response.lon && response.lat) {
         this.service.getTrails(response.lat, response.lon).subscribe(response => {
           this.trailsArray = response.trails;
+
           this.markers = [];
           this.trailsArray.forEach(trail => {
-            console.log(trail);
+            // console.log(trail);
+
             this.markers.push({
               info: { title: trail.name },
               position: new google.maps.LatLng({
@@ -285,14 +288,24 @@ export class TrailsComponent implements OnInit {
                 lng: Number(trail.longitude)
               })
             })
+
           });
+
+          console.log(this.trailsArray);
+          // this.service.getGeocode(this.trailsArray[0].location).subscribe(response => {
+          //   console.log(response.results[0].geometry.location)
+          //   this.center = new google.maps.LatLng({
+          //     lat: response.results[0].geometry.location.lat,
+          //     lng: response.results[0].geometry.location.lng
+          //   });
+          // });
         })
       } else {
         this.service.getDefaultTrails().subscribe(response => {
           this.trailsArray = response.trails;
           this.markers = [];
           this.trailsArray.forEach(trail => {
-            console.log(trail);
+            // console.log(trail);
             this.markers.push({
               info: { title: trail.name },
               position: new google.maps.LatLng({
@@ -362,7 +375,7 @@ export class TrailsComponent implements OnInit {
             this.trailsArray = response.trails;
             this.markers = [];
             this.trailsArray.forEach(trail => {
-              console.log(trail);
+              // console.log(trail);
               this.markers.push({
                 info: { title: trail.name },
                 position: new google.maps.LatLng({
