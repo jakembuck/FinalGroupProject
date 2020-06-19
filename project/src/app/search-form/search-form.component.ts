@@ -291,7 +291,6 @@ export class SearchFormComponent implements OnInit {
 
       this.service.getParks(response).subscribe(response => {
         this.parksList = response.data;
-        // console.log(this.parksList);
         this.markers = [];
         this.parksList.forEach(park => {
           this.markers.push({
@@ -347,7 +346,6 @@ export class SearchFormComponent implements OnInit {
   }
   getTrails(park): any {
     this.service.getTrails(park).subscribe(response => {
-      // console.log(response);
       this.data = response;
     })
   }

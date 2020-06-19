@@ -263,10 +263,6 @@ export class SearchListComponent implements OnInit {
   constructor(private service: SiteService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    // this.route.url.subscribe(response => {
-    //   console.log(response)
-    // })
-
     this.route.queryParams.subscribe(response => {
       this.zoom = 6;
       let keyTerm: string = null;
@@ -284,7 +280,8 @@ export class SearchListComponent implements OnInit {
         })
         keyTerm = stateObj.name
       } else if (response.q == null && response.state == null) {
-        keyTerm = ""
+        keyTerm = "Mt. Pleasant, Michigan"
+        this.getDefaultParks();
       }
 
 
@@ -319,7 +316,6 @@ export class SearchListComponent implements OnInit {
   submitForm(form: NgForm) {
     this.router.navigate(["/search-list"], {
       queryParams: {
-        // can change name of state and "q"
         q: form.value.search,
         state: form.value.stateSearch
       }
@@ -338,5 +334,22 @@ export class SearchListComponent implements OnInit {
     this.service.addToParkInfo(park)
 
   }
+  getDefaultParks(): any {
+    this.service.getDefaultParks().subscribe(response => {
+      this.zoom = 5;
+      this.parksList = response.data;
+      this.parksList.forEach(park => {
+        this.markers.push({
+          info: { title: park.fullName },
+          position: new google.maps.LatLng({
+            lat: Number(park.latitude),
+            lng: Number(park.longitude)
+          })
+        })
+      });
+    });
+
+
+  };
 
 }

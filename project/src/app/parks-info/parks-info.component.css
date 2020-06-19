@@ -1,0 +1,9 @@
+.park-images-container {
+    display: flex;
+    flex-direction: row;
+
+}
+.park-images {
+    height: 150px;
+    width: 150px;
+}

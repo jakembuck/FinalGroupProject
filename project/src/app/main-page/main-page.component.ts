@@ -26,17 +26,7 @@ export class MainPageComponent implements OnInit {
 
   constructor(private service: SiteService, private router: Router, private route: ActivatedRoute) { }
 
-  ngOnInit(): void {
-
-    // this.route.queryParams.subscribe(response => {
-    //   this.service.getCampgrounds(response.q).subscribe(campResponse => {
-    //     this.campgroundsArray = campResponse.data;
-    //     console.log(campResponse.data);
-    //   })
-    // })
-  };
-
-
+  ngOnInit(): void { }
 
   submitForm(form: NgForm) {
     console.log(form.value)
@@ -45,16 +35,13 @@ export class MainPageComponent implements OnInit {
         q: form.value.search,
         state: form.value.stateSearch
       }
-    })
-
-
-  }
+    });
+  };
 
   getTrails(park): any {
     this.service.getTrails(park).subscribe(response => {
       console.log(response);
       this.data = response;
-    })
-  }
-
-}
+    });
+  };
+};
