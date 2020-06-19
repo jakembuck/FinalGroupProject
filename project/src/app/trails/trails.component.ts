@@ -318,7 +318,7 @@ export class TrailsComponent implements OnInit {
       });
     })
   }
-
+  //heyyyyyyy
   setCenterAndGetTrails(location: any) {
     this.service.getGeocode(location).subscribe(response => {
       let lat = response.results[0].geometry.location.lat
