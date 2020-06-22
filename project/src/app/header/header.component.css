@@ -6,6 +6,8 @@
     margin: 0;
     background-color: #A6C1AC;
     padding: 5px;
+    box-shadow: 0px 5px 1px #00000000;
+opacity: 1;
 }
 
 .nav-links {
@@ -19,7 +21,13 @@
 .link {
     padding-left: 5px;
     text-align: center;
-
+    text-decoration: none;
+    color: black;
+    
+}
+.link:hover {
+    color: rgb(41, 40, 40);
+    font-size: 17px;
 }
 
 .hidden {

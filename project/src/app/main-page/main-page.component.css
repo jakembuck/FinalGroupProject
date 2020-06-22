@@ -1,14 +1,36 @@
+
+.main {
+    background-position: left; 
+    background-image: url(./backgrounds/Hiking.jpg), linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15));
+    background-blend-mode: overlay;
+    height: 100vh;
+    width: 100%;
+    /* background-position: center; */
+    background-size: cover;
+}
 .title-div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.main {
-    background-image: url(./backgrounds/matt-thornhill-GpjCysteKvI-unsplash.jpg);
-    height: 100vh;
-    width: 100%;
-    background-position: center;
-    background-size: cover;
-    background-color: black;
+.title {
+    font-size: 45px;
+    letter-spacing: 7px;
+}
+.description{
+    margin-bottom: 10px;
+    letter-spacing: 3px;
+}
+
+@media screen and (min-width: 768px) {
+    .title {
+        font-size: 60px;
+        letter-spacing: 7px;
+    }
+    .description{
+        margin-bottom: 10px;
+        letter-spacing: 3px;
+        font-size: 25px;
+    }
 }

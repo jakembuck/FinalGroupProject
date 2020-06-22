@@ -1,0 +1,18 @@
+.search-list-container {
+    display: flex;
+}
+
+/* .park-list-container {
+    display: flex;
+    justify-content: space-evenly;
+} */
+
+
+.park-box {
+    display: flex;
+}
+.park-images {
+    height: 92px;
+    width: 150px;
+    
+}
