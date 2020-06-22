@@ -9,8 +9,8 @@ export class SiteService {
   parksEndpoint: string = `${this.parksURL}/parks`;
   parksKey: string = "uinpd79oZtZKa8hqkU4aZg2Udp09HZ0mH4wYaNT8";
   campgroundsEndpoint: string = `${this.parksURL}/campgrounds`;
-  thingsToDoEndpoint: string = `${this.parksURL}/thingstodo`;
-  alertsEndpoint: string = `${this.parksURL}/alerts`;
+  // thingsToDoEndpoint: string = `${this.parksURL}/thingstodo`;
+  // alertsEndpoint: string = `${this.parksURL}/alerts`;
   geocodeURL: string = "https://maps.googleapis.com/maps/api/geocode/json";
 
   parkInfoPageArray: any = [];
@@ -89,22 +89,22 @@ export class SiteService {
       }
     });
   };
-  getAlerts(q: string): any {
-    return this.http.get(this.alertsEndpoint, {
-      params: {
-        q: q,
-        api_key: this.parksKey
-      }
-    });
-  }
-  getThingsToDo(q: string): any {
-    return this.http.get(this.thingsToDoEndpoint, {
-      params: {
-        q: q,
-        api_key: this.parksKey
-      }
-    });
-  }
+  // getAlerts(q: string): any {
+  //   return this.http.get(this.alertsEndpoint, {
+  //     params: {
+  //       q: q,
+  //       api_key: this.parksKey
+  //     }
+  //   });
+  // }
+  // getThingsToDo(q: string): any {
+  //   return this.http.get(this.thingsToDoEndpoint, {
+  //     params: {
+  //       q: q,
+  //       api_key: this.parksKey
+  //     }
+  //   });
+  // }
   getTrails(trailObj: any): any {
     console.log(trailObj);
     let params: any = {}

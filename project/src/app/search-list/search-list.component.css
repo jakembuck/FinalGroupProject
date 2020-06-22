@@ -10,6 +10,7 @@
 
 .park-box {
     display: flex;
+    margin: 5px;
 }
 .park-images {
     height: 92px;
