@@ -1,13 +1,13 @@
-<div>
-    <form class="form-container" #searchForm="ngForm" (ngSubmit)=submitForm(searchForm)>
-        <label for="search"></label>
-        <input type="text" id="search" name="search" placeholder="Search by national park" ngModel>
-        <label for="stateSearch"></label>
-        <select name="stateSearch" id="stateSearch" ngModel>
-            <option value="">State</option>
-            <option *ngFor="let state of states" value="{{state.sc}}">{{state.sc}}</option>
-        </select>
-        <button class="btn search-btn"><i class="fas fa-search"></i></button>
+<div class="form-container-div">
+  <form class="form-container" #searchForm="ngForm" (ngSubmit)=submitForm(searchForm)>
+    <label for="search"></label>
+    <input type="text" id="search" name="search" placeholder="Search by national park" ngModel>
+    <label for="stateSearch"></label>
+    <select name="stateSearch" id="stateSearch" ngModel>
+      <option value="">State</option>
+      <option *ngFor="let state of states" value="{{state.sc}}">{{state.sc}}</option>
+    </select>
+    <button class="btn search-btn"><i class="fas fa-search"></i></button>
 
-    </form>
+  </form>
 </div>

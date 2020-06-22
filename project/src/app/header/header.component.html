@@ -1,15 +1,16 @@
 <header class="header">
 
-    <h1 class="site-title" routerLink="/main-page">TT</h1>
-
+  <h1 class="site-title" routerLink="/main-page">TT</h1>
+  <div>
+    <i class="fas fa-bars" (click)="toggleClass()"></i>
     <nav class="navigation-list">
-        <i class="fas fa-bars" (click)="toggleClass()"></i>
-        <ul class="nav-links" [ngClass]="{hidden : hidden}">
-            <li><a class="link" href="#" routerLink="/parks">Parks</a></li>
-            <li><a class="link" href="#" routerLink="/campgrounds">Campgrounds</a></li>
-            <li><a class="link" href="#" routerLink="/trails">Trails</a></li>
-            <li><a class="link" href="https://www.theworldsworstwebsiteever.com/">Activism</a></li>
-        </ul>
-
+      <ul class="nav-links" [ngClass]="{hidden : hidden}">
+        <li><a class="link" href="#" routerLink="/parks">Parks</a></li>
+        <li><a class="link" href="#" routerLink="/campgrounds">Campgrounds</a></li>
+        <li><a class="link" href="#" routerLink="/trails">Trails</a></li>
+        <li><a class="link" href="https://www.theworldsworstwebsiteever.com/">Activism</a></li>
+      </ul>
     </nav>
+  </div>
+
 </header>
