@@ -4,18 +4,38 @@
     text-align: center;
     align-items: center;
     margin: 0;
-    background-color: lightgrey;
+    background-color: #A6C1AC;
     padding: 5px;
 }
+
 .nav-links {
     display: flex;
     justify-content: space-around;
     text-align: center;
-
+    flex-direction: column;
+    /* display: none; */
 
 }
 .link {
     padding-left: 5px;
     text-align: center;
 
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+/* media queries */
+
+@media screen and (min-width: 768px) {
+    .fa-bars {
+        display: none;
+    }
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+    }
 }
