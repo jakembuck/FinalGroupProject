@@ -5,10 +5,12 @@
     <i class="fas fa-bars" (click)="toggleClass()"></i>
     <nav class="navigation-list">
       <ul class="nav-links" [ngClass]="{hidden : hidden}">
-        <li><a class="link" href="#" routerLink="/parks">Parks</a></li>
+        <!-- <div class="navSearch">
+          <app-search-form></app-search-form>
+        </div> -->
+        <li><a class="link p" href="#" routerLink="/parks">Parks</a></li>
         <li><a class="link" href="#" routerLink="/campgrounds">Campgrounds</a></li>
         <li><a class="link" href="#" routerLink="/trails">Trails</a></li>
-        <li><a class="link" href="https://www.theworldsworstwebsiteever.com/">Activism</a></li>
       </ul>
     </nav>
   </div>

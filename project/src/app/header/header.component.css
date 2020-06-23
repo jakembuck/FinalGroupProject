@@ -22,29 +22,39 @@
   font-size: 26px;
 }
 .nav-links {
+    height: 94vh;
     display: flex;
+    min-width: 33%;
+    padding: 0px;
     justify-content: space-around;
     text-align: center;
+    align-content: center;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     background-color: #F9F8ED;
-    right: 0%;
-    top: 53px;
     right: 0px;
-    border: #706A67 solid 2px;
+    top: 53px;
+    /* border: #706A67 solid 2px; */
     border-radius: 2px;
-    padding: 10px;
+    /* padding: 20px; */
     box-shadow: -5px 10px 10px rgba(0, 0, 0, 0.25);
 }
+/* .navSearch{
+  max-width: 15px;
+} */
 .link {
+    font-size: 1.2rem;
     text-align: center;
     text-decoration: none;
     color: black;
     font-family: 'Playfair Display', serif;
     border-bottom: #706A67 solid 2px;
-}
-li{
-  padding: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
 }
 
 .hidden {
