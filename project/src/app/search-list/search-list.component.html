@@ -1,29 +1,30 @@
-<app-search-form></app-search-form>
 <div class="search-list-container">
   <div class="park-list-container">
-    <div class="park-box">
-      <ul>
-        <li>
-          <div *ngFor="let park of parksList" (click)="getTrails(park)" (click)=addToParkInfo(park)
-            routerLink="/park-info">
-            <div class="park-images">
-              <img src="{{ park.images[0].url }}" alt="{{ park.images[0].altText }}" width="200px" height="200px">
-            </div>
-            <h2>{{ park.name }}</h2>
-            <div *ngFor="let parkAddress of park.addresses">
-              <h3 *ngIf="parkAddress.type === 'Physical'">{{parkAddress.city}}, {{parkAddress.stateCode}}</h3>
-            </div>
-          </div>
-        </li>
-      </ul>
+    <div class="parks-info-container" *ngFor="let park of parksList" (click)="getTrails(park)"
+      (click)="addToParkInfo(park)" routerLink="/park-info">
+      <div class="park-images">
+        <img src="{{ park.images[0].url }}" alt="{{ park.images[0].altText }}" width="175px" height="100%">
+      </div>
+      <div class="parkInfo">
+        <h2 class="parkName">{{ park.name }}</h2>
+        <h3 class="parkDes">{{park.designation}}</h3>
+        <div *ngFor="let parkAddress of park.addresses">
+          <h4 *ngIf="parkAddress.type === 'Physical'">{{parkAddress.city}}, {{parkAddress.stateCode}}</h4>
+        </div>
+      </div>
     </div>
   </div>
-  <google-map [center]="center" [zoom]="zoom">
-    <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [title]="marker.title"
-      (mapClick)="openInfo(markerElem, marker.info)">
-    </map-marker>
-    <map-info-window>
-      <h1>{{infoContent?.title}}</h1>
-    </map-info-window>
-  </google-map>
+  <div class="mapDiv">
+    <google-map class="gMap" [center]="center" [zoom]="zoom" width="100%" height="200px">
+      <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [title]="marker.title"
+        (mapClick)="openInfo(markerElem, marker.info)">
+      </map-marker>
+      <map-info-window>
+        <h1>{{infoContent?.title}}</h1>
+      </map-info-window>
+    </google-map>
+  </div>
+  <div class="searchDiv">
+    <app-search-form></app-search-form>
+  </div>
 </div>

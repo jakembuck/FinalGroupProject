@@ -21,6 +21,7 @@ export class SearchListComponent implements OnInit {
   title: any;
   label: any;
   infoContent: any;
+  options: google.maps.MapOptions = {};
   states: any[] = [
     {
       name: "Alabama",
