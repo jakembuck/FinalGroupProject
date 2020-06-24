@@ -265,7 +265,7 @@ export class SearchListComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(response => {
-      this.zoom = 6;
+      this.zoom = 4;
       let keyTerm: string = null;
       let stateObj: any = null
       if (response.q && response.state) {

@@ -1,43 +1,49 @@
 <div class="park-info-container" *ngFor="let parkInfo of parkInfoPageArray">
-  <h1 class="park-info-title">{{parkInfo.fullName}}</h1>
-  <h2>{{ parkInfo.designation }}</h2>
-  <div class="park-images-container" *ngFor="let image of parkInfo.images">
-    <div><img class="park-images" src="{{image.url}}" alt="{{image.altText"></div>
+  <div class="mama-image-container">
+    <div class="park-images-container" *ngFor="let image of parkInfo.images">
+      <div><img class="park-images" src="{{image.url}}" alt="{{image.altText"></div>
   </div>
-  <div *ngFor="let parkAddress of parkInfo.addresses">
-    <h3 *ngIf="parkAddress.type === 'Physical'">{{parkAddress.city}}, {{parkAddress.stateCode}}</h3>
-  </div>
-  <p>Phone Number: {{ parkInfo.contacts.phoneNumbers[0].phoneNumber }}</p>
-  <p>Email: {{ parkInfo.contacts.emailAddresses[0].emailAddress }}</p>
-  <h3>Entrance Fees</h3>
-  <div class=" entrance-fee-container" *ngFor="let fee of parkInfo.entranceFees">
-      <p>{{fee.title}}</p>
-      <p>${{fee.cost}}</p>
-      <p>{{fee.description}}</p>
+</div>
+<div class ="park-info-content">
+  <h1 class="park-title">{{parkInfo.fullName}}</h1>
+  <h2 class=" park-des">{{ parkInfo.designation }}</h2>
+        <div *ngFor=" let parkAddress of parkInfo.addresses">
+          <h3 class="park-city" *ngIf="parkAddress.type === 'Physical'">{{parkAddress.city}}, {{parkAddress.stateCode}}
+          </h3>
+        </div>
+        <p class="park-number"> <b>Phone Number:</b> {{ parkInfo.contacts.phoneNumbers[0].phoneNumber }}</p>
+        <p class="park-email"> <b>Email: </b>{{ parkInfo.contacts.emailAddresses[0].emailAddress }}</p>
 
-    </div>
+        <h3 class="park-fees">Entrance Fees</h3>
+        <div class=" entrance-fee-container" *ngFor="let fee of parkInfo.entranceFees">
+          <p class="fee-title">{{fee.title}}</p>
+          <p class="fee-cost">${{fee.cost}}</p>
+          <p class="fee-description">{{fee.description}}</p>
 
-    <div class="weekday-hours">
-      <h3>Hours of Operation</h3>
-      <p class="hours monday">Monday: {{parkInfo.operatingHours[0].standardHours.monday}}</p>
-      <p class="hours tuesday">Tuesday: {{parkInfo.operatingHours[0].standardHours.tuesday}}</p>
-      <p class="hours wednesday">Wednesday: {{parkInfo.operatingHours[0].standardHours.wednesday}}</p>
-      <p class="hours thursday">Thursday: {{parkInfo.operatingHours[0].standardHours.thursday}}</p>
-      <p class="hours friday">Friday: {{parkInfo.operatingHours[0].standardHours.friday}}</p>
-      <p class="hours saturday">Saturday: {{parkInfo.operatingHours[0].standardHours.saturday}}</p>
-      <p class="hours sunday">Sunday: {{parkInfo.operatingHours[0].standardHours.sunday}}</p>
-    </div>
-    <p>{{ parkInfo.description }}</p>
-    <p>{{ parkInfo.weatherInfo }}</p>
-    <div class="activities-list-container">
-      <h3>Activities</h3>
-      <ul>
-        <li *ngFor="let activity of parkInfo.activities">
-          <p>{{ activity.name }}</p>
-        </li>
-      </ul>
+        </div>
 
-      <a (click)=getParkTrails(parkInfo)>Get Trails</a>
-      <a (click)=getParkCampgrounds(parkInfo)>Get Campsites</a>
+        <div class="weekday-hours">
+          <h3 class="park-hours-title">Hours of Operation</h3>
+          <p class="hours monday"> <b>Monday</b>: {{parkInfo.operatingHours[0].standardHours.monday}}</p>
+          <p class="hours tuesday"> <b>Tuesday:</b> {{parkInfo.operatingHours[0].standardHours.tuesday}}</p>
+          <p class="hours wednesday"> <b>Wednesday:</b> {{parkInfo.operatingHours[0].standardHours.wednesday}}</p>
+          <p class="hours thursday"> <b>Thursday:</b> {{parkInfo.operatingHours[0].standardHours.thursday}}</p>
+          <p class="hours friday"> <b>Friday:</b> {{parkInfo.operatingHours[0].standardHours.friday}}</p>
+          <p class="hours saturday"> <b>Saturday:</b> {{parkInfo.operatingHours[0].standardHours.saturday}}</p>
+          <p class="hours sunday"> <b>Sunday:</b> {{parkInfo.operatingHours[0].standardHours.sunday}}</p>
+        </div>
+        <p>{{ parkInfo.description }}</p>
+        <p>{{ parkInfo.weatherInfo }}</p>
+        <div class="activities-list-container">
+          <h3>Activities</h3>
+          <ul>
+            <li *ngFor="let activity of parkInfo.activities">
+              <p>{{ activity.name }}</p>
+            </li>
+          </ul>
+
+          <a (click)=getParkTrails(parkInfo)>Get Trails</a>
+          <a (click)=getParkCampgrounds(parkInfo)>Get Campsites</a>
+        </div>
+      </div>
     </div>
-  </div>

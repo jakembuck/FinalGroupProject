@@ -20,6 +20,7 @@ export class TrailsComponent implements OnInit {
   title: any;
   label: any;
   infoContent: any;
+  highlightIndex: number = null;
   options: google.maps.MapOptions;
   states: any[] = [
     {
@@ -514,19 +515,31 @@ export class TrailsComponent implements OnInit {
     this.service.addToTrailInfo(trail)
   }
 
-  openInfo(marker: MapMarker, content: any) {
+  openInfo(marker: MapMarker, content: any, index: number) {
     this.infoContent = content;
-    this.info.open(marker)
+    this.info.open(marker);
+    console.log(marker, content);
+    this.highlightIndex = index;
   }
+
+  scrollToElement(element): void {
+    console.log(element);
+    element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+  }
+  // scrollToElement(element, index): void {
+  //   console.log(element);
+  //   element[index].scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+  // }
+
   getTrails(params: any) {
     console.log(params);
     this.service.getTrails(params).subscribe(response => {
       console.log(response);
       this.trailsArray = response.trails;
       this.markers = [];
-      this.trailsArray.forEach(trail => {
+      this.trailsArray.forEach((trail, index) => {
         this.markers.push({
-          info: { title: trail.name },
+          info: { title: trail.name, index: index },
           position: new google.maps.LatLng({
             lat: Number(trail.latitude),
             lng: Number(trail.longitude)

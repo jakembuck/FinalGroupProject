@@ -16,8 +16,9 @@
   </div>
   <div class="mapDiv">
     <google-map class="gMap" [center]="center" [zoom]="zoom" [options]="options" width="100%" height="200px">
-      <map-marker #markerElem *ngFor="let marker of markers" [position]="marker.position" [title]="marker.title"
-        (mapClick)="openInfo(markerElem, marker.info)">
+      <map-marker #markerElem *ngFor="let marker of markers"
+        [options]="{icon: 'http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png'}" [position]="marker.position"
+        [title]="marker.title" (mapClick)="openInfo(markerElem, marker.info)">
       </map-marker>
       <map-info-window>
         <h1>{{infoContent?.title}}</h1>

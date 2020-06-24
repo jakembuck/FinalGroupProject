@@ -265,7 +265,7 @@ export class CampgroundsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(response => {
-      this.zoom = 6;
+      this.zoom = 5;
       let keyTerm: string = null;
       let stateObj: any = null
       if (response.q && response.state) {
@@ -289,7 +289,7 @@ export class CampgroundsComponent implements OnInit {
 
         this.getParkCampgrounds(response);
       } else if (!response.q && !response.state) {
-        keyTerm = "mt.pleasant, Michigan"
+        keyTerm = "Munising, Michigan"
         this.setCenter(keyTerm);
         this.getDefaultCampgrounds()
       }
@@ -515,11 +515,13 @@ export class CampgroundsComponent implements OnInit {
     }
   }
   getDefaultCampgrounds() {
+    let image = "http://maps.google.com/mapfiles/ms/icons/campground.png";
     this.service.getDefaultCampgrounds().subscribe(response => {
       this.campgroundsArray = response.data;
       this.markers = [];
       this.campgroundsArray.forEach(campground => {
         this.markers.push({
+          icon: image,
           info: { title: campground.name },
           position: new google.maps.LatLng({
             lat: Number(campground.latitude),

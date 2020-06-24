@@ -5,6 +5,11 @@
     background-color: #f9f8ed;
     /* z-index: -2 */
 }
+.highlight {
+  border: 1px solid #e78c57;
+  box-shadow: 0 0 5px 1px #e78c57;
+}
+
 .trail-list-container{
   display: flex;
   flex-direction: column;
