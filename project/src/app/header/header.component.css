@@ -22,6 +22,8 @@
 }
 #secondText {
   font-size: 1.5rem;
+  position: relative;
+  bottom: 7px;
 }
 .fa-bars{
   padding: 5px;
