@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { SiteService } from '../site.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -12,6 +12,7 @@ import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 export class TrailsComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap
   @ViewChild(MapInfoWindow, { static: false }) info: MapInfoWindow
+  @ViewChildren("trail") trails: any;
   trailsArray = [];
   parkInfoPageArray: any = [];
   zoom: any;
@@ -520,16 +521,12 @@ export class TrailsComponent implements OnInit {
     this.info.open(marker);
     console.log(marker, content);
     this.highlightIndex = index;
+    this.scrollTo(index);
   }
 
-  scrollToElement(element): void {
-    console.log(element);
-    element.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+  scrollTo(index: number) {
+    this.trails._results[index].nativeElement.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
   }
-  // scrollToElement(element, index): void {
-  //   console.log(element);
-  //   element[index].scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
-  // }
 
   getTrails(params: any) {
     console.log(params);
@@ -537,9 +534,9 @@ export class TrailsComponent implements OnInit {
       console.log(response);
       this.trailsArray = response.trails;
       this.markers = [];
-      this.trailsArray.forEach((trail, index) => {
+      this.trailsArray.forEach((trail) => {
         this.markers.push({
-          info: { title: trail.name, index: index },
+          info: { title: trail.name },
           position: new google.maps.LatLng({
             lat: Number(trail.latitude),
             lng: Number(trail.longitude)

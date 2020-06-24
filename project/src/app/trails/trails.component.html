@@ -1,7 +1,7 @@
 <div class="search-list-container">
   <div class="trail-map">
     <div class="trail-list-container">
-      <div #target class="trails-info-container" *ngFor="let trail of trailsArray; index as i"
+      <div #trail class="trails-info-container" *ngFor="let trail of trailsArray; index as i"
         (click)=addToTrailInfo(trail) routerLink="/trail-info" [ngClass]="{highlight: i === highlightIndex}">
         <div class="trail-images">
           <img trail-images *ngIf="trail.imgSmall" src="{{trail.imgSmall}}" alt="image of {{trail.name}} trail"
@@ -28,7 +28,6 @@
         </map-marker>
         <map-info-window>
           <h1>{{infoContent?.title}}</h1>
-          <!-- <a (click)="scrollToElement(target)">clickity click me</a> -->
 
         </map-info-window>
       </google-map>

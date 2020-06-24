@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { SiteService } from '../site.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -12,6 +12,8 @@ import { GoogleMap, MapInfoWindow, MapMarker } from '@angular/google-maps';
 export class CampgroundsComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap
   @ViewChild(MapInfoWindow, { static: false }) info: MapInfoWindow
+  @ViewChildren("campground") campgrounds: any;
+
   campgroundsArray = [];
   data: any;
   zoom: any;
@@ -20,6 +22,7 @@ export class CampgroundsComponent implements OnInit {
   title: any;
   label: any;
   infoContent: any;
+  highlightIndex: number = null;
   options: google.maps.MapOptions;
   states: any[] = [
     {
@@ -538,9 +541,14 @@ export class CampgroundsComponent implements OnInit {
     this.service.addToCampgroundInfo(campground)
   }
 
-  openInfo(marker: MapMarker, content: any) {
+  openInfo(marker: MapMarker, content: any, index: number) {
     this.infoContent = content;
     this.info.open(marker)
+    this.highlightIndex = index;
+    this.scrollTo(index);
+  }
+  scrollTo(index: number) {
+    this.campgrounds._results[index].nativeElement.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
   }
   getParkCampgrounds(params: any) {
     this.service.getParkCampgrounds(params).subscribe(response => {

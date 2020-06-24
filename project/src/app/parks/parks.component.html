@@ -1,8 +1,8 @@
 <div class="search-list-container">
   <div class="park-map">
     <div class="park-list-container">
-      <div class="parks-info-container" *ngFor="let park of parksArray" (click)="addToParkInfo(park)"
-        routerLink="/park-info">
+      <div #park class="parks-info-container" *ngFor="let park of parksArray; index as i" (click)="addToParkInfo(park)"
+        routerLink="/park-info" [ngClass]="{highlight: i === highlightIndex}">
         <div class="park-images">
           <img src="{{ park.images[0].url }}" alt="{{ park.images[0].altText }}" width="175px" height="100%">
         </div>
@@ -18,9 +18,9 @@
     </div>
     <div class="mapDiv">
       <google-map class="gMap" [center]="center" [zoom]="zoom" [options]="options" width="100%" height="100%">
-        <map-marker #markerElem *ngFor="let marker of markers"
+        <map-marker #markerElem *ngFor="let marker of markers; index as i "
           [options]="{icon: 'http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png'}" [position]="marker.position"
-          [title]="marker.title" (mapClick)="openInfo(markerElem, marker.info)">
+          [title]="marker.title" (mapClick)="openInfo(markerElem, marker.info, i)">
         </map-marker>
         <map-info-window>
           <h1>{{infoContent?.title}}</h1>

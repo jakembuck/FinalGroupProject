@@ -18,6 +18,10 @@
   font-family: 'Playfair Display', serif;
   padding: 5px;
   font-size: 2rem;
+  margin-left: 15px;
+}
+#secondText {
+  font-size: 1.5rem;
 }
 .fa-bars{
   padding: 5px;
@@ -92,6 +96,9 @@
     }
     .link:hover {
       border-bottom: 3px solid #706a677a;
+    }
+    .link::after {
+      border-bottom: 3px solid #706A67;
     }
     
 }
