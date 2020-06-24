@@ -1,35 +1,38 @@
 <div class="search-list-container">
-  <div class="trail-list-container">
-    <div #target class="trails-info-container" *ngFor="let trail of trailsArray; index as i"
-      (click)=addToTrailInfo(trail) routerLink="/trail-info" [ngClass]="{highlight: i === highlightIndex}">
-      <div class="trail-images">
-        <img trail-images *ngIf="trail.imgSmall" src="{{trail.imgSmall}}" alt="image of {{trail.name}} trail"
-          width="175px" height="100%">
-        <img *ngIf="!trail.imgSmall"
-          src="https://stmedia.stimg.co/ows_140804475621318.jpg?fit%5Cu003dcrop%5Cu0026crop%5Cu003dfaces"
-          alt="image of {{trail.name}} trail" width="175px" height="100%" [ngClass]="{highlight: i === highlightIndex}">
-      </div>
-      <div class="trailInfo">
+  <div class="trail-map">
+    <div class="trail-list-container">
+      <div #target class="trails-info-container" *ngFor="let trail of trailsArray; index as i"
+        (click)=addToTrailInfo(trail) routerLink="/trail-info" [ngClass]="{highlight: i === highlightIndex}">
+        <div class="trail-images">
+          <img trail-images *ngIf="trail.imgSmall" src="{{trail.imgSmall}}" alt="image of {{trail.name}} trail"
+            width="175px" height="100%">
+          <img *ngIf="!trail.imgSmall"
+            src="https://stmedia.stimg.co/ows_140804475621318.jpg?fit%5Cu003dcrop%5Cu0026crop%5Cu003dfaces"
+            alt="image of {{trail.name}} trail" width="175px" height="100%"
+            [ngClass]="{highlight: i === highlightIndex}">
+        </div>
+        <div class="trailInfo">
 
-        <h1 class="trailName">{{ trail.name }}</h1>
-        <h2 class="trailLocation">{{trail.location}}</h2>
-        <h3 class="trailStars">{{trail.stars}}</h3>
+          <h1 class="trailName">{{ trail.name }}</h1>
+          <h2 class="trailLocation">{{trail.location}}</h2>
+          <h3 class="trailStars">Trail Intesity: {{trail.stars}} out of 5</h3>
+        </div>
       </div>
+
     </div>
+    <div class="mapDiv">
+      <google-map class="gMap" [center]="center" [zoom]="zoom" [options]="options" width="100%" height="100%">
+        <map-marker #markerElem *ngFor="let marker of markers; index as i"
+          [options]="{icon: 'http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png'}" [position]="marker.position"
+          [title]="marker.title" (mapClick)="openInfo(markerElem, marker.info, i)">
+        </map-marker>
+        <map-info-window>
+          <h1>{{infoContent?.title}}</h1>
+          <!-- <a (click)="scrollToElement(target)">clickity click me</a> -->
 
-  </div>
-  <div class="mapDiv">
-    <google-map class="gMap" [center]="center" [zoom]="zoom" [options]="options" width="100%" height="200px">
-      <map-marker #markerElem *ngFor="let marker of markers; index as i"
-        [options]="{icon: 'http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png'}" [position]="marker.position"
-        [title]="marker.title" (mapClick)="openInfo(markerElem, marker.info, i)">
-      </map-marker>
-      <map-info-window>
-        <h1>{{infoContent?.title}}</h1>
-        <!-- <a (click)="scrollToElement(target)">clickity click me</a> -->
-
-      </map-info-window>
-    </google-map>
+        </map-info-window>
+      </google-map>
+    </div>
   </div>
   <div class="searchDiv">
     <app-search-form></app-search-form>
