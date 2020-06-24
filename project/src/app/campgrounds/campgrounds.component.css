@@ -28,10 +28,8 @@
   border-bottom: 2px solid #706A67;
 }
 .highlight {
-  border-top: 2px solid #706A67;
-  border-right: 2px solid #706A67;
-  border-left: 2px solid #706A67;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.404);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 1.75)
+
 
 }
 .campgroundName{
@@ -68,7 +66,7 @@
     width: 60%;
     height: 70vh;
     right: 30px;
-    top: 20vh;
+    top: 131px;
     position: fixed;
     /* flex: 1 */
   }
@@ -80,10 +78,8 @@
     width: 33.5%;
   }
   .campgrounds-info-container:hover{
-    border-top: 2px solid #706A67;
-    border-right: 2px solid #706A67;
-    border-left: 2px solid #706A67;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.404);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 1.75)
+
 }
   .campgroundName{
     font-size: .8rem;

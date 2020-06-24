@@ -1,67 +1,69 @@
 <div class="campground-info-container" *ngFor="let campgroundInfo of campgroundInfoPageArray">
-  <h1 class="campground-info-title">{{campgroundInfo.name}}</h1>
-  <p *ngIf="campgroundInfo.contacts.phoneNumber">Phone Number:
-    {{ campgroundInfo.contacts.phoneNumbers[0]?.phoneNumber }}
-  </p>
-  <p *ngIf="campgroundInfo.contacts.emailAddress">Email: {{ campgroundInfo.contacts.emailAddresses[0]?.emailAddress }}
-  </p>
-  <h3>Fees</h3>
-  <div *ngFor="let fee of campgroundInfo.fees">
-    <h4>{{fee.title}}</h4>
-    <!-- need to convert cost string to number  -->
-    <p> <b>Cost:</b> ${{fee.cost}}</p>
-    <!-- <p> <b>Cost:</b> ${{ {{fee.cost}} | number : 2}}</p> -->
-
-    <p> {{fee.description}}</p>
+  <div class="mama-image-container">
+    <div class="campground-images-container" *ngFor="let image of campgroundInfo.images">
+      <div>
+        <img class="campground-images" src="{{image.url}}" alt="{{image.altText}}">
+      </div>
+    </div>
   </div>
-  <div class="weekday-hours">
-    <h3>Hours of Operation</h3>
-    <p class="hours description">{{campgroundInfo.operatingHours[0].description}}</p>
-    <p class="hours monday">Monday: {{campgroundInfo.operatingHours[0].standardHours.monday}}</p>
-    <p class="hours tuesday">Tuesday: {{campgroundInfo.operatingHours[0].standardHours.tuesday}}</p>
-    <p class="hours wednesday">Wednesday: {{campgroundInfo.operatingHours[0].standardHours.wednesday}}</p>
-    <p class="hours thursday">Thursday: {{campgroundInfo.operatingHours[0].standardHours.thursday}}</p>
-    <p class="hours friday">Friday: {{campgroundInfo.operatingHours[0].standardHours.friday}}</p>
-    <p class="hours saturday">Saturday: {{campgroundInfo.operatingHours[0].standardHours.saturday}}</p>
-    <p class="hours sunday">Sunday: {{campgroundInfo.operatingHours[0].standardHours.sunday}}</p>
-  </div>
-  <p>{{ campgroundInfo.description }}</p>
-  <h3>Reservations</h3>
-  <p [innerHTML]="campgroundInfo.reservationInfo">{{campgroundInfo.reservationInfo}}</p>
-  <a href="{{campgroundInfo.reservationUrl}}" *ngIf="campgroundInfo.reservationUrl">Make a Reservation</a>
-  <p>Number of Available Sites: {{campgroundInfo.numberOfSitesReservable}}</p>
-  <p>HORSES??!!: {{campgroundInfo.campsites.horse}}</p>
-  <div class="activities-list-container">
-    <h3>Amenities</h3>
-    <ul>
-      <li>Amphitheater: {{ campgroundInfo.amenities.amphitheater }}</li>
-      <li>Showers: {{ campgroundInfo.amenities.showers }}</li>
-      <li>Toilets: {{ campgroundInfo.amenities.toilets }}</li>
-      <li>Laundry: {{ campgroundInfo.amenities.laundry }}</li>
-      <li>Cell Reception: {{ campgroundInfo.amenities.cellPhoneReception }}</li>
-      <li>Wifi: {{ campgroundInfo.amenities.internetConnectivity }}</li>
-      <li>Food Storage Lockers: {{ campgroundInfo.amenities.foodStorageLockers }}</li>
+  <div class="campground-info-content">
+    <h1 class="campground-title">{{campgroundInfo.name}}</h1>
+    <p class=" campground-number" *ngIf=" campgroundInfo.contacts.phoneNumber">Phone Number:
+      {{ campgroundInfo.contacts.phoneNumbers[0]?.phoneNumber }}
+    </p>
+    <p class="campground-email" *ngIf="campgroundInfo.contacts.emailAddress">Email:
+      {{ campgroundInfo.contacts.emailAddresses[0]?.emailAddress }}
+    </p>
+    <h3 class="park-fees">Campground Fees</h3>
+    <div class=" entrance-fee-container" *ngFor="let fee of campgroundInfo.fees">
+      <p class="fee-title">{{fee.title}}</p>
+      <p class="fee-cost"> <b>Cost:</b> ${{convertToNumber(fee.cost)}}</p>
+      <p class="fee-description"> {{fee.description}}</p>
+    </div>
 
-      <li>Trash/Recycling: {{ campgroundInfo.amenities.trashRecyclingCollection }}</li>
-      <li>Dump Station: {{ campgroundInfo.amenities.dumpStation }}</li>
-      <li>Camp Store: {{ campgroundInfo.amenities.campStore }}</li>
-      <li>Ice for Sale: {{ campgroundInfo.amenities.iceAvailableForSale }}</li>
-      <li>Firewood for Sale: {{ campgroundInfo.amenities.firewoodForSale }}</li>
+    <div class="weekday-hours">
+      <h3>Hours of Operation</h3>
+      <p class="hours description">{{campgroundInfo.operatingHours[0].description}}</p>
+      <p class="hours monday">Monday: {{campgroundInfo.operatingHours[0].standardHours.monday}}</p>
+      <p class="hours tuesday">Tuesday: {{campgroundInfo.operatingHours[0].standardHours.tuesday}}</p>
+      <p class="hours wednesday">Wednesday: {{campgroundInfo.operatingHours[0].standardHours.wednesday}}</p>
+      <p class="hours thursday">Thursday: {{campgroundInfo.operatingHours[0].standardHours.thursday}}</p>
+      <p class="hours friday">Friday: {{campgroundInfo.operatingHours[0].standardHours.friday}}</p>
+      <p class="hours saturday">Saturday: {{campgroundInfo.operatingHours[0].standardHours.saturday}}</p>
+      <p class="hours sunday">Sunday: {{campgroundInfo.operatingHours[0].standardHours.sunday}}</p>
+    </div>
+    <h3 class="descriptionTitle">Campground Description</h3>
+    <p class="campgroundDescription">{{ campgroundInfo.description }}</p>
+    <h3 class="reservations">Reservations</h3>
+    <p [innerHTML]="campgroundInfo.reservationInfo">{{campgroundInfo.reservationInfo}}</p>
+    <a href="{{campgroundInfo.reservationUrl}}" *ngIf="campgroundInfo.reservationUrl">Make a Reservation</a>
+    <p>Number of Available Sites: {{campgroundInfo.numberOfSitesReservable}}</p>
+    <div class="activities-list-container">
+      <h3 class="amentities-title">Amenities</h3>
+      <p class="amentity">Amphitheater: {{ campgroundInfo.amenities.amphitheater }}</p>
+      <p class="amentity">Showers: {{ campgroundInfo.amenities.showers }}</p>
+      <p class="amentity">Toilets: {{ campgroundInfo.amenities.toilets }}</p>
+      <p class="amentity">Laundry: {{ campgroundInfo.amenities.laundry }}</p>
+      <p class="amentity">Cell Reception: {{ campgroundInfo.amenities.cellPhoneReception }}</p>
+      <p class="amentity">Wifi: {{ campgroundInfo.amenities.internetConnectivity }}</p>
+      <p class="amentity">Food Storage Lockers: {{ campgroundInfo.amenities.foodStorageLockers }}</p>
 
-    </ul>
-    <h3>Weather</h3>
-    <p>Overview: {{campgroundInfo.weatherOverview}}</p>
+      <p class="amentity">Trash/Recycling: {{ campgroundInfo.amenities.trashRecyclingCollection }}</p>
+      <p class="amentity">Dump Station: {{ campgroundInfo.amenities.dumpStation }}</p>
+      <p class="amentity">Camp Store: {{ campgroundInfo.amenities.campStore }}</p>
+      <p class="amentity">Ice for Sale: {{ campgroundInfo.amenities.iceAvailableForSale }}</p>
+      <p class="amentity">Firewood for Sale: {{ campgroundInfo.amenities.firewoodForSale }}</p>
+      <h3 class="weatherTitle">Weather</h3>
+      <p class="campgroundWeather">Overview: {{campgroundInfo.weatherOverview}}</p>
 
-    <h3>Accessibility</h3>
-    <p>{{campgroundInfo.accessibility.wheelchairAccess}}</p>
-    <p>{{campgroundInfo.accessibility.adaInfo}}</p>
+      <h3 class="access-title">Accessibility</h3>
+      <p class="wheelchair">{{campgroundInfo.accessibility.wheelchairAccess}}</p>
+      <p class="ada-info">{{campgroundInfo.accessibility.adaInfo}}</p>
 
-    <h3>More Info</h3>
-    <p> <b>Fires:</b> {{campgroundInfo.accessibility.fireStovePolicy}}</p>
-    <p> <b>RVs:</b> {{campgroundInfo.accessibility.rvInfo}}</p>
-
-    <a href="#" routerLink="/trail-info">Get Trails</a>
-
-    <p></p>
+      <h3 class="more-info-title">More Info</h3>
+      <p class="more-info"> <b>Fires:</b> {{campgroundInfo.accessibility.fireStovePolicy}}</p>
+      <p class="more-info"> <b>RVs:</b> {{campgroundInfo.accessibility.rvInfo}}</p>
+      <p></p>
+    </div>
   </div>
 </div>

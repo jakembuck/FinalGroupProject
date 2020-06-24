@@ -15,5 +15,9 @@ export class CampgroundInfoComponent implements OnInit {
   ngOnInit(): void {
     this.campgroundInfoPageArray = this.service.getCampgroundInfoArray();
   }
+  convertToNumber(string: string) {
+    let integer = parseInt(string).toFixed(2);
+    return integer;
+  }
 
 }
