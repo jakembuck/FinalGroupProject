@@ -1,36 +1,38 @@
 <div class="search-list-container">
-  <div class="campground-list-container">
-    <div class="campgrounds-info-container" *ngFor="let campground of campgroundsArray"
-      (click)="addToCampgroundInfo(campground)" routerLink="/campground-info">
-      <div class="campground-images">
-        <img *ngIf="campground.images" src="{{ campground?.images[0].url }}" alt="{{ campground?.images[0].altText }}"
-          width="175px" height="100%">
-        <img *ngIf="!campground.images"
-          src="https://images.unsplash.com/photo-1568226292321-dd67ff8b3b2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-          alt="default campsite image" width="175px" height="100%">
+  <div class="campground-map">
+    <div class="campground-list-container">
+      <div class="campgrounds-info-container" *ngFor="let campground of campgroundsArray"
+        (click)="addToCampgroundInfo(campground)" routerLink="/campground-info">
+        <div class="campground-images">
+          <img *ngIf="campground.images" src="{{ campground?.images[0].url }}" alt="{{ campground?.images[0].altText }}"
+            width="175px" height="100%">
+          <img *ngIf="!campground.images"
+            src="https://images.unsplash.com/photo-1568226292321-dd67ff8b3b2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+            alt="default campsite image" width="175px" height="100%">
 
 
-      </div>
-      <div class="campgroundInfo">
-        <h2 class="campgroundName">{{ campground?.name }}</h2>
-        <div *ngFor="let campgroundAddress of campground?.addresses">
-          <h4 *ngIf="campgroundAddress.type === 'Physical'">{{campgroundAddress?.city}},
-            {{campgroundAddress?.stateCode}}
-          </h4>
+        </div>
+        <div class="campgroundInfo">
+          <h2 class="campgroundName">{{ campground?.name }}</h2>
+          <div *ngFor="let campgroundAddress of campground?.addresses">
+            <h4 class="campgroundLoc" *ngIf="campgroundAddress.type === 'Physical'">{{campgroundAddress?.city}},
+              {{campgroundAddress?.stateCode}}
+            </h4>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="mapDiv">
-    <google-map class="gMap" [center]="center" [zoom]="zoom" [options]="options" width="100%" height="200px">
-      <map-marker #markerElem *ngFor="let marker of markers"
-        [options]="{icon: 'http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png'}" [position]=" marker.position"
-        [title]="marker.title" (mapClick)="openInfo(markerElem, marker.info)">
-      </map-marker>
-      <map-info-window>
-        <h1>{{infoContent?.title}}</h1>
-      </map-info-window>
-    </google-map>
+    <div class="mapDiv">
+      <google-map class="gMap" [center]="center" [zoom]="zoom" [options]="options" width="100%" height="100%">
+        <map-marker #markerElem *ngFor="let marker of markers"
+          [options]="{icon: 'http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png'}" [position]=" marker.position"
+          [title]="marker.title" (mapClick)="openInfo(markerElem, marker.info)">
+        </map-marker>
+        <map-info-window>
+          <h1>{{infoContent?.title}}</h1>
+        </map-info-window>
+      </google-map>
+    </div>
   </div>
   <div class="searchDiv">
     <app-search-form></app-search-form>

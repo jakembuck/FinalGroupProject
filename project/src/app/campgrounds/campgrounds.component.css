@@ -5,6 +5,10 @@
     background-color: #f9f8ed;
     /* z-index: -2 */
 }
+.campground-map {
+  display: flex;
+  flex-direction: column-reverse;
+}
 .campground-list-container{
   display: flex;
   flex-direction: column;
@@ -35,7 +39,8 @@
   width: 150px;
 }
 .mapDiv{
-  width: 90%;
+  width: 100%;
+  height: 200px;
   margin-top: 20px;
   box-shadow: 0px 10px 10px rgb(0, 0, 0, .26);
   /* z-index: -1; */
@@ -49,3 +54,29 @@
   width: 100% !important;
   height: 100% !important;
 } */
+@media screen and (min-width: 768px) {
+  .mapDiv {
+    width: 60%;
+    height: 70vh;
+    right: 30px;
+    top: 20vh;
+    position: fixed;
+    /* flex: 1 */
+  }
+  .campground-map {
+    flex-direction: row;
+    width: 90%;
+  }
+  .campground-list-container {
+    width: 33.5%;
+  }
+  .campgroundName{
+    font-size: .8rem;
+  }
+  .campgroundDes{
+    font-size: .7rem;
+  }
+  .campgroundLoc {
+    font-size: .6rem;
+  }
+}
