@@ -59,5 +59,8 @@ export class ParksInfoComponent implements OnInit {
       }
     })
   }
-
+  convertToNumber(string: string) {
+    let integer = parseInt(string).toFixed(2);
+    return integer;
+  }
 };

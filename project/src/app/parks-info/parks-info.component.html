@@ -17,14 +17,14 @@
         <h3 class="park-fees">Entrance Fees</h3>
         <div class=" entrance-fee-container" *ngFor="let fee of parkInfo.entranceFees">
           <p class="fee-title">{{fee.title}}</p>
-          <p class="fee-cost">${{fee.cost}}</p>
+          <p class="fee-cost">${{convertToNumber(fee.cost)}}</p>
           <p class="fee-description">{{fee.description}}</p>
 
         </div>
 
         <div class="weekday-hours">
           <h3 class="park-hours-title">Hours of Operation</h3>
-          <p class="hours monday"> <span id="secondText">Monday:</span>
+          <p class="hours monday"> <b>Monday:</b>
             {{parkInfo.operatingHours[0].standardHours.monday}}</p>
           <p class="hours tuesday"> <b>Tuesday:</b> {{parkInfo.operatingHours[0].standardHours.tuesday}}</p>
           <p class="hours wednesday"> <b>Wednesday:</b> {{parkInfo.operatingHours[0].standardHours.wednesday}}</p>
@@ -33,18 +33,19 @@
           <p class="hours saturday"> <b>Saturday:</b> {{parkInfo.operatingHours[0].standardHours.saturday}}</p>
           <p class="hours sunday"> <b>Sunday:</b> {{parkInfo.operatingHours[0].standardHours.sunday}}</p>
         </div>
-        <p>{{ parkInfo.description }}</p>
-        <p>{{ parkInfo.weatherInfo }}</p>
+        <h3 class="descriptionTitle">Park Description</h3>
+        <p class="parkDescription">{{ parkInfo.description }}</p>
+        <h3 class="weatherTitle">Weather</h3>
+        <p class="parkWeather">{{ parkInfo.weatherInfo }}</p>
         <div class="activities-list-container">
-          <h3>Activities</h3>
-          <ul>
-            <li *ngFor="let activity of parkInfo.activities">
-              <p>{{ activity.name }}</p>
-            </li>
-          </ul>
-
-          <a (click)=getParkTrails(parkInfo)>Get Trails</a>
-          <a (click)=getParkCampgrounds(parkInfo)>Get Campsites</a>
+          <h3 class="actTitle">Activities</h3>
+          <div class="actNames" *ngFor="let activity of parkInfo.activities">
+            <p>{{ activity.name }}</p>
+          </div>
+          <div class="links">
+            <button class="parkLink" (click)=getParkTrails(parkInfo)>Get Trails</button>
+            <button class="parkLink" (click)=getParkCampgrounds(parkInfo)>Get Campsites</button>
+          </div>
         </div>
       </div>
     </div>

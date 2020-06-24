@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   background-color: #f9f8ed;
-
+  margin-bottom:20px;
 }
 .mama-image-container {
   display: flex;
@@ -12,32 +12,118 @@
   width: 90%;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.404);
   margin-top: 20px;
-
-
 }
-/* .park-images-container {
-    width: 80%;
-
-} */
 .park-images {
     flex: 0 0 auto;
     height: 150px;
     width: 150px;
     margin: 5px;
-  }
-  .park-info-content {
-    display: flex;
+}
+.park-title{
+  font-size: 1.5rem;
+  border-bottom: 2px solid #706A67;
+  text-align: center;
+}
+.park-des{
+  padding-top: 5px;
+  font-size: 1.1rem;
+}
+.park-city{
+  font-size: 1.1rem;
+  padding-bottom: 10px;
+}
+.park-email{
+  padding-bottom: 10px;
+}
+.park-fees{
+  padding-bottom: 5px;
+}
+.fee-cost{
+  padding-bottom: 5px;
+}
+.fee-description{
+  padding-bottom: 10px;
+}
+.park-hours-title{
+  padding-bottom: 5px;
+}
+.sunday{
+  padding-bottom: 15px;
+}
+.descriptionTitle{
+  padding-bottom:5px;
+}
+.parkDescription{
+  padding-bottom: 15px;
+}
+.weatherTitle{
+  padding-bottom:5px;
+}
+.parkWeather{
+  padding-bottom: 15px;
+}
+.actTitle{
+  padding-bottom: 5px;
+}
+.links{
+  padding-top: 15px;
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 5px;
+}
+.parkLink{
+  text-align: center;
+  padding:5px;
+  background-color: #FFB77B;
+  color: black;
+  border-radius: 10px;
+  border: 1.5px solid #FFB77B;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+}
+.park-info-content {
+  display: flex;
     flex-direction: column;
     margin-top: 20px;
     padding: 10px;
     width: 90%;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.404);
     background-color: #f9f8ed;
-
-  }
-  #secondText{
+}
+/* #secondText{
     font-weight: 900;
     color:#5f6a61;
-    /* #A6C1AC */
-    
+} */
+@media screen and (min-width: 768px) {
+  .park-title{
+    font-size: 2rem;
+    text-decoration: underline;
+    border-bottom: none;
   }
+  .park-images {
+    flex: 0 0 auto;
+    height: 450px;
+    width: 450px;
+    margin: 5px;
+  }
+  .park-city{
+    padding-bottom: 30px;
+  }
+  .park-email{
+    padding-bottom: 30px;
+  }
+  .fee-description{
+    padding-bottom: 30px;
+  }
+  .sunday{
+    padding-bottom: 40px;
+  }
+  .parkDescription{
+    padding-bottom: 40px;
+  }
+  .parkWeather{
+    padding-bottom: 40px;
+  }
+  .links{
+    padding-top: 30px;
+  }
+}
