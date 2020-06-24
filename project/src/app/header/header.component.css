@@ -80,11 +80,18 @@
         display: none;
     }
     .nav-links {
-        display: flex;
-        flex-direction: row;
+      position: static;
+      display: flex;
+      flex-direction: row;
+      height: auto; 
+    }
+    .link {
+      font-size: 1.2rem;
+      border: none; 
+      padding-bottom: 15px;
     }
     .link:hover {
-      color: rgb(41, 40, 40);
-      font-size: 17px;
-  }
+      border-bottom: 3px solid #706a677a;
+    }
+    
 }

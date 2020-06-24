@@ -1,10 +1,10 @@
 <div class="search-list-container">
   <div class="trail-list-container">
     <div #target class="trails-info-container" *ngFor="let trail of trailsArray; index as i"
-      (click)=addToTrailInfo(trail) routerLink="/trail-info">
+      (click)=addToTrailInfo(trail) routerLink="/trail-info" [ngClass]="{highlight: i === highlightIndex}">
       <div class="trail-images">
         <img trail-images *ngIf="trail.imgSmall" src="{{trail.imgSmall}}" alt="image of {{trail.name}} trail"
-          width="175px" height="100%" [ngClass]="{highlight: i === highlightIndex}">
+          width="175px" height="100%">
         <img *ngIf="!trail.imgSmall"
           src="https://stmedia.stimg.co/ows_140804475621318.jpg?fit%5Cu003dcrop%5Cu0026crop%5Cu003dfaces"
           alt="image of {{trail.name}} trail" width="175px" height="100%" [ngClass]="{highlight: i === highlightIndex}">
