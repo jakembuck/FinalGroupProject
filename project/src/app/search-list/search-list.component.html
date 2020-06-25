@@ -17,6 +17,9 @@
       </div>
     </div>
     <div class="mapDiv">
+      <div class="searchDiv desktop">
+        <app-search-form></app-search-form>
+      </div>
       <google-map class="gMap" [center]="center" [zoom]="zoom" [options]="options" width="100%" height="100%">
         <map-marker #markerElem *ngFor="let marker of markers; index as i"
           [options]="{icon: 'http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png'}" [position]="marker.position"
@@ -28,7 +31,7 @@
       </google-map>
     </div>
   </div>
-  <div class="searchDiv">
+  <div class="searchDiv mobile">
     <app-search-form></app-search-form>
   </div>
 </div>

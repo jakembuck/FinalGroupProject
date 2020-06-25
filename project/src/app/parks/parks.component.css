@@ -49,24 +49,31 @@
   height: 200px;
   margin-top: 20px;
   box-shadow: 0px 10px 10px rgb(0, 0, 0, .26);
-  /* z-index: -1; */
+}
+.mobile{
+  margin-top: 20px;
+}
+.desktop{
+  display: none
 }
 .searchDiv{
   margin-top: 20px;
 }
 
-/* .google-map iframe{
-  position: absolute;
-  width: 100% !important;
-  height: 100% !important;
-} */
 @media screen and (min-width: 768px) {
   .mapDiv {
     width: 60%;
     height: 70vh;
     right: 30px;
-    top: 131px;
+    top: 68px;
     position: fixed;
+    box-shadow: none
+  }
+  .mobile{
+    display: none
+  }
+  .desktop{
+    display: block;
   }
   .park-map {
     flex-direction: row;
@@ -74,6 +81,8 @@
   }
   .park-list-container {
     width: 33.5%;
+    margin-top: 20px;
+    min-width: 0px;
   }
   .parks-info-container:hover{
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 1.75)
