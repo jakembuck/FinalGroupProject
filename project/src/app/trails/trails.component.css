@@ -129,7 +129,7 @@
   width: 90%;
 }
 .mapDiv {
-  width: 60%;
+  max-width: 59.5vw;
   height: 70vh;
   right: 30px;
   top: 68px;
