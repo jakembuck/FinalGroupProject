@@ -31,10 +31,11 @@
   }
   .campground-city{
     font-size: 1.1rem;
-    padding-bottom: 10px;
+    padding-top: 5px;
+    padding-bottom: 15px;
   }
   .campground-email{
-    padding-bottom: 10px;
+    padding-bottom: 15px;
   }
   .campground-fees{
     padding-bottom: 5px;
@@ -86,6 +87,9 @@
   }
   .operation{
     padding-bottom: 5px;
+  }
+  .contacts-title{
+    padding-bottom:5px;
   }
   .fee-title{
     padding-bottom: 5px;

@@ -8,13 +8,18 @@
   </div>
   <div class="campground-info-content">
     <h1 class="campground-title">{{campgroundInfo.name}}</h1>
-    <p class=" campground-number" *ngIf=" campgroundInfo.contacts.phoneNumber">Phone Number:
+    <div *ngFor=" let campAddress of campgroundInfo.addresses">
+      <h3 class="campground-city" *ngIf="campAddress.type === 'Physical'">{{campAddress.city}},
+        {{campAddress.stateCode}}
+      </h3>
+    </div>
+    <h3 class="contacts-title">Contact Information</h3>
+    <p class=" campground-number" *ngIf=" campgroundInfo.contacts.phoneNumbers[0].phoneNumber">Phone Number:
       {{ campgroundInfo.contacts.phoneNumbers[0]?.phoneNumber }}
     </p>
-    <p class="campground-email" *ngIf="campgroundInfo.contacts.emailAddress">Email:
+    <p class="campground-email" *ngIf="campgroundInfo.contacts.emailAddresses[0]?.emailAddress">Email:
       {{ campgroundInfo.contacts.emailAddresses[0]?.emailAddress }}
     </p>
-
     <div class=" entrance-fee-container" *ngFor="let fee of campgroundInfo.fees">
       <h3 class="park-fees" *ngIf="fee.cost">Campground Fees</h3>
       <p class="fee-title">{{fee.title}}</p>
@@ -25,13 +30,20 @@
     <div class="weekday-hours">
       <h3 class="operation">Hours of Operation</h3>
       <p class="hours description">{{campgroundInfo.operatingHours[0].description}}</p>
-      <p class="hours monday">Monday: {{campgroundInfo.operatingHours[0].standardHours.monday}}</p>
-      <p class="hours tuesday">Tuesday: {{campgroundInfo.operatingHours[0].standardHours.tuesday}}</p>
-      <p class="hours wednesday">Wednesday: {{campgroundInfo.operatingHours[0].standardHours.wednesday}}</p>
-      <p class="hours thursday">Thursday: {{campgroundInfo.operatingHours[0].standardHours.thursday}}</p>
-      <p class="hours friday">Friday: {{campgroundInfo.operatingHours[0].standardHours.friday}}</p>
-      <p class="hours saturday">Saturday: {{campgroundInfo.operatingHours[0].standardHours.saturday}}</p>
-      <p class="hours sunday">Sunday: {{campgroundInfo.operatingHours[0].standardHours.sunday}}</p>
+      <p class="hours monday"><b>Monday:</b>
+        {{campgroundInfo.operatingHours[0].standardHours.monday}}</p>
+      <p class="hours tuesday"><b>Tuesday:</b>
+        {{campgroundInfo.operatingHours[0].standardHours.tuesday}}</p>
+      <p class="hours wednesday"><b>Wednesday:</b>
+        {{campgroundInfo.operatingHours[0].standardHours.wednesday}}</p>
+      <p class="hours thursday"><b>Thursday:</b>
+        {{campgroundInfo.operatingHours[0].standardHours.thursday}}</p>
+      <p class="hours friday"><b>Friday:</b>
+        {{campgroundInfo.operatingHours[0].standardHours.friday}}</p>
+      <p class="hours saturday"><b>Saturday:</b>
+        {{campgroundInfo.operatingHours[0].standardHours.saturday}}</p>
+      <p class="hours sunday"><b>Sunday:</b>
+        {{campgroundInfo.operatingHours[0].standardHours.sunday}}</p>
     </div>
     <h3 class="descriptionTitle">Campground Description</h3>
     <p class="campgroundDescription">{{ campgroundInfo.description }}</p>
