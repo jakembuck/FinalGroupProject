@@ -72,6 +72,19 @@
     justify-content: space-around;
     padding-bottom: 5px;
   }
+  .reservations {
+    padding-bottom: 5px;
+  }
+
+  .activities-list-container, .avail-sites {
+    padding-bottom: 15px;
+  }
+  .weatherTitle {
+    padding-bottom: 5px;
+  }
+  .more-info-title {
+    padding-bottom: 5px;
+  }
   .campgroundLink{
     text-align: center;
     padding:5px;
