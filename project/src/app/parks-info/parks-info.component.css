@@ -5,6 +5,7 @@
   justify-content: center;
   background-color: #f9f8ed;
   margin-bottom:20px;
+  width: 90%;
 }
 .mama-image-container {
   display: flex;

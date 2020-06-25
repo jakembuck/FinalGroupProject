@@ -22,6 +22,7 @@ export class TrailsComponent implements OnInit {
   title: any;
   label: any;
   infoContent: any;
+  isShow: boolean = true;
   highlightIndex: number = null;
   options: google.maps.MapOptions;
   states: any[] = [
@@ -562,6 +563,15 @@ export class TrailsComponent implements OnInit {
       });
       this.getTrails({ lat: lat, lng: lng });
     });
+  }
+  showLegend() {
+    this.isShow = !this.isShow;
+    console.log(this.isShow)
+
+  }
+  hideLegend() {
+    !this.isShow
+    console.log(this.isShow)
   }
 
 };

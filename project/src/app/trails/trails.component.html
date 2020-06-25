@@ -15,7 +15,7 @@
 
           <h1 class="trailName">{{ trail.name }}</h1>
           <h2 class="trailLocation">{{trail.location}}</h2>
-          <h3 class="trailStars">Trail Intesity: {{trail.stars}} out of 5</h3>
+          <h3 class="trailStars">Star Rating: {{trail.stars}} out of 5</h3>
         </div>
       </div>
 
@@ -30,14 +30,38 @@
           <h1>{{infoContent?.title}}</h1>
           <p *ngIf="infoContent?.summary !== 'Needs Summary'">{{infoContent?.summary}}</p>
           <p>{{infoContent?.length}} miles</p>
-          <p>{{infoContent?.difficulty}} difficulty</p>
-          <p>{{infoContent?.stars}} out of 5 stars</p>
+          <p>difficulty: {{infoContent?.difficulty}}</p>
+          <p>star rating: {{infoContent?.stars}} out of 5 stars</p>
         </map-info-window>
       </google-map>
+      <button class="show-legend-btn" (click)=showLegend()>View Trails Legend</button>
     </div>
   </div>
   <div class="searchDiv">
     <app-search-form></app-search-form>
+  </div>
+  <div class="legend-div" [hidden]='isShow' (click)=showLegend()>
+    <div class="trails-legend">
+      <div class="trails-legend-colors">
+        <h1 class="colors-title">Trail Difficulty:</h1>
+        <p class="colors"><span id='green'>green</span>: no obstacles, trail is flat.</p>
+        <p class="colors"><span id='green'>green</span><span id='blue'>Blue</span>: some uneven terrain, but trail is
+          mostly flat.</p>
+        <p class="colors"><span id='blue'>blue</span>: moderate inclines, uneven terrain.</p>
+        <p class="colors"> <span id='blue'>blue</span><span id='black'>Black</span>: some rocks and roots, trail has
+          steep inclines. </p>
+        <p class="colors"><span id='black'>black</span>: steep inclines with tricky terrain.</p>
+        <p class="colors"><span id='black'>dblack</span>: very steep inclines with hazardous terrain.</p>
+      </div>
+      <div class="trails-legend-stars">
+        <h1 class="star-title">Star Rating:</h1>
+        <p class="star-desc">Star ratings are an average of all votes. Enjoyment and perceived difficulty can differ
+          from person to
+          person,
+          so the rating system is designed to give you a general sense of the communities’ overall opinion</p>
+      </div>
+    </div>
+    <button class="hide-legend-btn" (click)=hideLegend()>Hide Legend</button>
   </div>
 </div>
 <!-- <div #target>####</div> -->

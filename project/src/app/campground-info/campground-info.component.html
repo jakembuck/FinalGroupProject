@@ -14,8 +14,9 @@
     <p class="campground-email" *ngIf="campgroundInfo.contacts.emailAddress">Email:
       {{ campgroundInfo.contacts.emailAddresses[0]?.emailAddress }}
     </p>
-    <h3 class="park-fees">Campground Fees</h3>
+
     <div class=" entrance-fee-container" *ngFor="let fee of campgroundInfo.fees">
+      <h3 class="park-fees" *ngIf="fee.cost">Campground Fees</h3>
       <p class="fee-title">{{fee.title}}</p>
       <p class="fee-cost"> <b>Cost:</b> ${{convertToNumber(fee.cost)}}</p>
       <p class="fee-description"> {{fee.description}}</p>
@@ -53,8 +54,8 @@
       <p class="amentity">Camp Store: {{ campgroundInfo.amenities.campStore }}</p>
       <p class="amentity">Ice for Sale: {{ campgroundInfo.amenities.iceAvailableForSale }}</p>
       <p class="amentity">Firewood for Sale: {{ campgroundInfo.amenities.firewoodForSale }}</p>
-      <h3 class="weatherTitle">Weather</h3>
-      <p class="campgroundWeather">Overview: {{campgroundInfo.weatherOverview}}</p>
+      <h3 class="weatherTitle">Weather Overview</h3>
+      <p class="campgroundWeather">{{campgroundInfo.weatherOverview}}</p>
 
       <h3 class="access-title">Accessibility</h3>
       <p class="wheelchair">{{campgroundInfo.accessibility.wheelchairAccess}}</p>
