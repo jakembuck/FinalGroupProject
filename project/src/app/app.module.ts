@@ -12,7 +12,6 @@ import { TrailsComponent } from './trails/trails.component';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { SearchFormComponent } from './search-form/search-form.component';
 import { CampgroundInfoComponent } from './campground-info/campground-info.component';
-import { TrailInfoComponent } from './trail-info/trail-info.component';
 import { ParksComponent } from './parks/parks.component';
 import { HeaderComponent } from './header/header.component'
 
@@ -26,7 +25,6 @@ import { HeaderComponent } from './header/header.component'
     TrailsComponent,
     SearchFormComponent,
     CampgroundInfoComponent,
-    TrailInfoComponent,
     ParksComponent,
     HeaderComponent,
 

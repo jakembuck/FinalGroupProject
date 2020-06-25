@@ -1,8 +1,8 @@
 <div class="search-list-container">
   <div class="trail-map">
     <div class="trail-list-container">
-      <div #trail class="trails-info-container" *ngFor="let trail of trailsArray; index as i"
-        (click)=addToTrailInfo(trail) routerLink="/trail-info" [ngClass]="{highlight: i === highlightIndex}">
+      <div #trail class="trails-info-container" *ngFor="let trail of trailsArray; index as i" (click)="openOpenInfo(i)"
+        [ngClass]="{highlight: i === highlightIndex}">
         <div class="trail-images">
           <img trail-images *ngIf="trail.imgSmall" src="{{trail.imgSmall}}" alt="image of {{trail.name}} trail"
             width="175px" height="100%">
@@ -28,7 +28,10 @@
         </map-marker>
         <map-info-window>
           <h1>{{infoContent?.title}}</h1>
-
+          <p *ngIf="infoContent?.summary !== 'Needs Summary'">{{infoContent?.summary}}</p>
+          <p>{{infoContent?.length}} miles</p>
+          <p>{{infoContent?.difficulty}} difficulty</p>
+          <p>{{infoContent?.stars}} out of 5 stars</p>
         </map-info-window>
       </google-map>
     </div>

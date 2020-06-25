@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, ɵɵtextInterpolateV } from '@angular/core';
 import { SiteService } from '../site.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
@@ -13,6 +13,7 @@ export class TrailsComponent implements OnInit {
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap
   @ViewChild(MapInfoWindow, { static: false }) info: MapInfoWindow
   @ViewChildren("trail") trails: any;
+  @ViewChildren("markerElem") markerElems: any;
   trailsArray = [];
   parkInfoPageArray: any = [];
   zoom: any;
@@ -266,7 +267,7 @@ export class TrailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(response => {
-      this.zoom = 6;
+      this.zoom = 8;
       let keyTerm: string = null;
       let stateObj: any = null
       if (response.q && response.state) {
@@ -523,9 +524,15 @@ export class TrailsComponent implements OnInit {
     this.highlightIndex = index;
     this.scrollTo(index);
   }
-
+  openOpenInfo(index: number) {
+    console.log(this.markerElems.toArray());
+    let markers = this.markerElems.toArray();
+    let marker = markers[index];
+    let markerContent = this.markers[index].info;
+    this.openInfo(marker, markerContent, index);
+  }
   scrollTo(index: number) {
-    this.trails._results[index].nativeElement.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+    this.trails.toArray()[index].nativeElement.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
   }
 
   getTrails(params: any) {
@@ -536,7 +543,7 @@ export class TrailsComponent implements OnInit {
       this.markers = [];
       this.trailsArray.forEach((trail) => {
         this.markers.push({
-          info: { title: trail.name },
+          info: { title: trail.name, difficulty: trail.difficulty, length: trail.length, stars: trail.stars, summary: trail.summary },
           position: new google.maps.LatLng({
             lat: Number(trail.latitude),
             lng: Number(trail.longitude)
