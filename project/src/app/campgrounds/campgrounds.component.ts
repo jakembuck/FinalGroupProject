@@ -519,8 +519,27 @@ export class CampgroundsComponent implements OnInit {
   }
   getDefaultCampgrounds() {
     let image = "http://maps.google.com/mapfiles/ms/icons/campground.png";
-    this.service.getDefaultCampgrounds().subscribe(response => {
-      this.campgroundsArray = response.data;
+    let cacheKey: string = "campsDefault";
+    if (!this.service.getCache(cacheKey)) {
+      this.service.getDefaultCampgrounds().subscribe(response => {
+        this.campgroundsArray = response.data;
+        this.service.setCache(cacheKey, response.data);
+        this.markers = [];
+        this.campgroundsArray.forEach(campground => {
+          this.markers.push({
+            icon: image,
+            info: { title: campground.name },
+            position: new google.maps.LatLng({
+              lat: Number(campground.latitude),
+              lng: Number(campground.longitude)
+            })
+          })
+        });
+
+      })
+    }
+    else {
+      this.campgroundsArray = this.service.getCache(cacheKey);
       this.markers = [];
       this.campgroundsArray.forEach(campground => {
         this.markers.push({
@@ -532,8 +551,7 @@ export class CampgroundsComponent implements OnInit {
           })
         })
       });
-
-    })
+    }
   }
 
   addToCampgroundInfo(campground): any {
@@ -551,8 +569,25 @@ export class CampgroundsComponent implements OnInit {
     this.campgrounds._results[index].nativeElement.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
   }
   getParkCampgrounds(params: any) {
-    this.service.getParkCampgrounds(params).subscribe(response => {
-      this.campgroundsArray = response.data;
+    this.campgroundsArray = [];
+    let cacheKey: string = `camps${JSON.stringify(params)}`;
+    if (!this.service.getCache(cacheKey)) {
+      this.service.getParkCampgrounds(params).subscribe(response => {
+        this.campgroundsArray = response.data;
+        this.markers = [];
+        this.campgroundsArray.forEach(campground => {
+          this.markers.push({
+            info: { title: campground.name },
+            position: new google.maps.LatLng({
+              lat: Number(campground.latitude),
+              lng: Number(campground.longitude)
+            })
+          })
+        });
+      })
+    }
+    else {
+      this.campgroundsArray = this.service.getCache(cacheKey);
       this.markers = [];
       this.campgroundsArray.forEach(campground => {
         this.markers.push({
@@ -563,7 +598,7 @@ export class CampgroundsComponent implements OnInit {
           })
         })
       });
-    })
+    }
   }
 
   setCenter(location: any) {

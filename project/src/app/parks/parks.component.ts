@@ -563,19 +563,37 @@ export class ParksComponent implements OnInit {
     this.parks._results[index].nativeElement.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
   }
   getParks(params: any) {
-    this.service.getParks(params).subscribe(response => {
-      this.parksArray = response.data;
+    this.parksArray = [];
+    let cacheKey: string = `parks${JSON.stringify(params)}`;
+    if (!this.service.getCache(cacheKey)) {
+      this.service.getParks(params).subscribe(response => {
+        this.parksArray = response.data;
+        this.service.setCache(cacheKey, response.data);
+        this.markers = [];
+        this.parksArray.forEach(park => {
+          this.markers.push({
+            info: { title: park.name },
+            position: new google.maps.LatLng({
+              lat: Number(park.latitude),
+              lng: Number(park.longitude)
+            })
+          })
+        });
+      })
+    }
+    else {
+      this.parksArray = this.service.getCache(cacheKey);
       this.markers = [];
-      this.parksArray.forEach(park => {
+      this.parksArray.forEach(campground => {
         this.markers.push({
-          info: { title: park.name },
+          info: { title: campground.name },
           position: new google.maps.LatLng({
-            lat: Number(park.latitude),
-            lng: Number(park.longitude)
+            lat: Number(campground.latitude),
+            lng: Number(campground.longitude)
           })
         })
       });
-    })
+    }
   }
   setCenter(location: any) {
     this.service.getGeocode(location).subscribe(response => {
