@@ -57,6 +57,15 @@
   .campgroundDescription{
     padding-bottom: 15px;
   }
+  .wood{
+    padding-bottom: 15px;
+  }
+  .sites{
+    padding-bottom: 15px;
+  }
+  .ada-info{
+    padding-bottom: 15px;
+  }
   .weatherTitle{
     padding-bottom:5px;
   }
@@ -75,14 +84,22 @@
   .reservations {
     padding-bottom: 5px;
   }
-
+  .operation{
+    padding-bottom: 5px;
+  }
+  .fee-title{
+    padding-bottom: 5px;
+  }
   .activities-list-container, .avail-sites {
     padding-bottom: 15px;
   }
-  .weatherTitle {
+  .more-info-title {
     padding-bottom: 5px;
   }
-  .more-info-title {
+  .amentities-title{
+    padding-bottom: 5px;
+  }
+  .access-title{
     padding-bottom: 5px;
   }
   .campgroundLink{
@@ -139,5 +156,14 @@
     }
     .links{
       padding-top: 30px;
+    }
+    .wood{
+      padding-bottom: 30px;
+    }
+    .sites{
+      padding-bottom: 30px;
+    }
+    .ada-info{
+      padding-bottom: 30px;
     }
   }

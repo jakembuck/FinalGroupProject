@@ -23,7 +23,7 @@
     </div>
 
     <div class="weekday-hours">
-      <h3>Hours of Operation</h3>
+      <h3 class="operation">Hours of Operation</h3>
       <p class="hours description">{{campgroundInfo.operatingHours[0].description}}</p>
       <p class="hours monday">Monday: {{campgroundInfo.operatingHours[0].standardHours.monday}}</p>
       <p class="hours tuesday">Tuesday: {{campgroundInfo.operatingHours[0].standardHours.tuesday}}</p>
@@ -38,7 +38,7 @@
     <h3 class="reservations">Reservations</h3>
     <p [innerHTML]="campgroundInfo.reservationInfo">{{campgroundInfo.reservationInfo}}</p>
     <a href="{{campgroundInfo.reservationUrl}}" *ngIf="campgroundInfo.reservationUrl">Make a Reservation</a>
-    <p>Number of Available Sites: {{campgroundInfo.numberOfSitesReservable}}</p>
+    <p class="sites">Number of Available Sites: {{campgroundInfo.numberOfSitesReservable}}</p>
     <div class="activities-list-container">
       <h3 class="amentities-title">Amenities</h3>
       <p class="amentity">Amphitheater: {{ campgroundInfo.amenities.amphitheater }}</p>
@@ -53,7 +53,7 @@
       <p class="amentity">Dump Station: {{ campgroundInfo.amenities.dumpStation }}</p>
       <p class="amentity">Camp Store: {{ campgroundInfo.amenities.campStore }}</p>
       <p class="amentity">Ice for Sale: {{ campgroundInfo.amenities.iceAvailableForSale }}</p>
-      <p class="amentity">Firewood for Sale: {{ campgroundInfo.amenities.firewoodForSale }}</p>
+      <p class="amentity wood">Firewood for Sale: {{ campgroundInfo.amenities.firewoodForSale }}</p>
       <h3 class="weatherTitle">Weather Overview</h3>
       <p class="campgroundWeather">{{campgroundInfo.weatherOverview}}</p>
 
@@ -64,7 +64,6 @@
       <h3 class="more-info-title">More Info</h3>
       <p class="more-info"> <b>Fires:</b> {{campgroundInfo.accessibility.fireStovePolicy}}</p>
       <p class="more-info"> <b>RVs:</b> {{campgroundInfo.accessibility.rvInfo}}</p>
-      <p></p>
     </div>
   </div>
 </div>
