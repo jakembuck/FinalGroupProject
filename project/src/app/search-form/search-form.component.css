@@ -50,15 +50,16 @@
     }
     
     #search {
-        
-        width: 85%;
-      
+      width: 85%;
     }
-    
+    .form-container{
+      max-width: 59.5vw;
+      margin-bottom: 30px;
+    }
+
     #stateSearch {
         margin-right: 5px;
         width: 10%;
-        
     }
 
 }

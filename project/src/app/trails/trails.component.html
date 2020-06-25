@@ -21,7 +21,10 @@
 
     </div>
     <div class="mapDiv">
-      <google-map class="gMap" [center]="center" [zoom]="zoom" [options]="options" width="100%" height="100%">
+      <div class="searchDiv desktop">
+        <app-search-form></app-search-form>
+      </div>
+      <google-map class="gMap" id="map" [center]="center" [zoom]="zoom" [options]="options" width="100%" height="100%">
         <map-marker #markerElem *ngFor="let marker of markers; index as i"
           [options]="{icon: 'http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png'}" [position]="marker.position"
           [title]="marker.title" (mapClick)="openInfo(markerElem, marker.info, i)">
@@ -37,7 +40,7 @@
       <button class="show-legend-btn" (click)=showLegend()>View Trails Legend</button>
     </div>
   </div>
-  <div class="searchDiv">
+  <div class="searchDiv mobile">
     <app-search-form></app-search-form>
   </div>
   <div class="legend-div" [hidden]='isShow' (click)=showLegend()>
