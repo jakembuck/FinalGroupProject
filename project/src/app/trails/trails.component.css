@@ -132,7 +132,7 @@
   width: 60%;
   height: 70vh;
   right: 30px;
-  top: 95px;
+  top: 68px;
   position: fixed;
   box-shadow: none
 }
@@ -164,6 +164,6 @@
 }
 .show-legend-btn{
  height: 40px;
- margin-top: 30px;
+ margin-top: 15px;
 }
 }
