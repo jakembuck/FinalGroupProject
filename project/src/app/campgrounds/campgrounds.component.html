@@ -5,9 +5,9 @@
         (click)="addToCampgroundInfo(campground)" routerLink="/campground-info"
         [ngClass]="{highlight: i === highlightIndex}">
         <div class="campground-images">
-          <img *ngIf="campground.images" src="{{ campground?.images[0].url }}" alt="{{ campground?.images[0].altText }}"
-            width="175px" height="100%">
-          <img *ngIf="!campground.images"
+          <img *ngIf="campground.images.length > 0" src="{{ campground?.images[0].url }}"
+            alt="{{ campground?.images[0].altText }}" width="175px" height="100%">
+          <img *ngIf="!campground.images || campground.images.length === 0"
             src="https://images.unsplash.com/photo-1568226292321-dd67ff8b3b2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
             alt="default campsite image" width="175px" height="100%">
 

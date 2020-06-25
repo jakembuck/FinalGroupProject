@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import lscache from 'lscache/lscache.min.js';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class SiteService {
   hikingTrailsKey: string = "200802785-232f5acce6a2f23888902edffe9f1bcf";
   trailLocationUrl: string = "https://www.hikingproject.com/data/get-trails";
 
+  expiration: number = 21600000;
   limit: any = 20;
   // lat: any;
   // lon: any;
@@ -34,7 +36,7 @@ export class SiteService {
   getParks(campObj: any): any {
     let params: any = {}
     params.api_key = this.parksKey;
-    params.limit = "200";
+    params.limit = "50";
     if (campObj.q) {
       params.q = campObj.q
     }
@@ -45,7 +47,6 @@ export class SiteService {
       params: params
     });
   };
-
   getCampgrounds(q: string, sc: string): any {
     return this.http.get(this.campgroundsEndpoint, {
       params: {
@@ -56,20 +57,10 @@ export class SiteService {
       }
     });
   };
-  // getParkCampgrounds(q: string, sc: string): any {
-  //   return this.http.get(this.campgroundsEndpoint, {
-  //     params: {
-  //       q: q,
-  //       api_key: this.parksKey,
-  //       stateCode: sc,
-  //       limit: this.limit
-  //     }
-  //   });
-  // };
   getParkCampgrounds(campObj: any): any {
     let params: any = {}
     params.api_key = this.parksKey;
-    params.limit = "200";
+    params.limit = "50";
     if (campObj.q) {
       params.q = campObj.q
     }
@@ -85,7 +76,7 @@ export class SiteService {
       params: {
         api_key: this.parksKey,
         stateCode: "MI",
-        limit: "200"
+        limit: "50"
       }
     });
   };
@@ -177,9 +168,14 @@ export class SiteService {
       params: {
         api_key: this.parksKey,
         stateCode: "MI",
-        limit: "200"
+        limit: "50"
       }
     });
   };
-
+  getCache(id: string): any {
+    return lscache.get(id);
+  }
+  setCache(id: string, object: any, expiration: number = this.expiration): void {
+    lscache.set(id, object, expiration);
+  }
 }

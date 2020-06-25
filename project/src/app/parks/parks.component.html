@@ -4,7 +4,8 @@
       <div #park class="parks-info-container" *ngFor="let park of parksArray; index as i" (click)="addToParkInfo(park)"
         routerLink="/park-info" [ngClass]="{highlight: i === highlightIndex}">
         <div class="park-images">
-          <img src="{{ park.images[0].url }}" alt="{{ park.images[0].altText }}" width="175px" height="100%">
+          <img *ngIf="park.images.length > 0" src="{{ park.images[0].url }}" alt="{{ park.images[0].altText }}"
+            width="175px" height="100%">
         </div>
         <div class="parkInfo">
           <h2 class="parkName">{{ park.name }}</h2>
