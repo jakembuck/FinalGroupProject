@@ -8,9 +8,7 @@ import { element } from 'protractor';
   styleUrls: ['./header.component.css']
 })
 
-
 export class HeaderComponent implements OnInit {
-
 
   hidden: boolean = true;
 

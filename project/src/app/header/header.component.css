@@ -1,17 +1,17 @@
 .header {
-    display: flex;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    justify-content: space-between;
-    text-align: center;
-    align-items: center;
-    margin: 0;
-    background-color: #A6C1AC;
-    box-shadow: 0px 5px 1px #00000000;
-    opacity: 1;
-    font-family: 'Playfair Display', serif;
-    box-shadow: 0px 10px 10px rgb(0, 0, 0, .26);
+  display: flex;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  margin: 0;
+  background-color: #A6C1AC;
+  box-shadow: 0px 5px 1px #00000000;
+  opacity: 1;
+  font-family: 'Playfair Display', serif;
+  box-shadow: 0px 10px 10px rgb(0, 0, 0, .26);
   z-index: 1;
 }
 .site-title{
@@ -38,29 +38,22 @@
   z-index: 10;
 }
 .nav-links {
-    height: 100vh;
-    display: flex;
-    /* min-width: 33%; */
-    padding: 0px;
-    top: 53px;
-    text-align: center;
-    align-content: center;
-    flex-direction: column;
-    position: fixed;
-    background-color: #A6C1AC;
-    right: 0px;
-    /* border: #706A67 solid 2px; */
-    border-radius: 2px;
-    /* padding: 20px; */
-    /* box-shadow: -5px 10px 10px rgba(0, 0, 0, 0.25); */
+  height: 100vh;
+  display: flex;
+  padding: 0px;
+  top: 53px;
+  text-align: center;
+  align-content: center;
+  flex-direction: column;
+  position: fixed;
+  background-color: #A6C1AC;
+  right: 0px;
+  border-radius: 2px;
 }
-/* .navSearch{
-  max-width: 15px;
-} */
 li {
-    padding: 15px;
-    border-top: black 2px solid;
-    border-bottom: black 2px solid;
+  padding: 15px;
+  border-top: black 2px solid;
+  border-bottom: black 2px solid;
 }
 .link{
   font-style: bold;
@@ -76,35 +69,33 @@ li {
   border-bottom: none;
 }
 .hidden {
-    display: none;
+  display: none;
 }
-
-
 
 /* media queries */
 
 @media screen and (min-width: 768px) {
-    .fa-bars {
-        display: none;
-    }
-    .nav-links {
-      position: static;
-      display: flex;
-      flex-direction: row;
-      height: auto; 
-    }
-    .link {
-      font-size: 1.2rem;
-      border: none; 
-      padding-bottom: 15px;
-    }
-    .link:hover {
-      border-bottom: 3px solid #706a677a;
-    }
-    .link::after {
-      border-bottom: 3px solid #706A67;
-    }
-    li{
-      border: none
-    }
+.fa-bars {
+  display: none;
+  }
+.nav-links {
+  position: static;
+  display: flex;
+  flex-direction: row;
+  height: auto; 
+  }
+.link {
+  font-size: 1.2rem;
+  border: none; 
+  padding-bottom: 15px;
+}
+.link:hover {
+  border-bottom: 3px solid #706a677a;
+}
+.link::after {
+  border-bottom: 3px solid #706A67;
+}
+li{
+  border: none
+}
 }

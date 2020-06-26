@@ -3,7 +3,6 @@
     flex-direction: column-reverse;
     align-items: center;
     background-color: #f9f8ed;
-    /* z-index: -2 */
 }
 .campground-map {
   display: flex;

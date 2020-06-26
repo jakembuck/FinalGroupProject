@@ -10,23 +10,15 @@ export class SiteService {
   parksEndpoint: string = `${this.parksURL}/parks`;
   parksKey: string = "uinpd79oZtZKa8hqkU4aZg2Udp09HZ0mH4wYaNT8";
   campgroundsEndpoint: string = `${this.parksURL}/campgrounds`;
-  // thingsToDoEndpoint: string = `${this.parksURL}/thingstodo`;
-  // alertsEndpoint: string = `${this.parksURL}/alerts`;
   geocodeURL: string = "https://maps.googleapis.com/maps/api/geocode/json";
-
   parkInfoPageArray: any = [];
   campgroundInfoPageArray: any = [];
   trailInfoPageArray: any = [];
   maxResults: any = 50;
-
-  // hiking trails 
   hikingTrailsKey: string = "200802785-232f5acce6a2f23888902edffe9f1bcf";
   trailLocationUrl: string = "https://www.hikingproject.com/data/get-trails";
-
   expiration: number = 21600000;
   limit: any = 20;
-  // lat: any;
-  // lon: any;
   DefLatitude: any = 43.590926;
   DefLongitude: any = -84.716219;
   constructor(private http: HttpClient) { }
@@ -80,22 +72,6 @@ export class SiteService {
       }
     });
   };
-  // getAlerts(q: string): any {
-  //   return this.http.get(this.alertsEndpoint, {
-  //     params: {
-  //       q: q,
-  //       api_key: this.parksKey
-  //     }
-  //   });
-  // }
-  // getThingsToDo(q: string): any {
-  //   return this.http.get(this.thingsToDoEndpoint, {
-  //     params: {
-  //       q: q,
-  //       api_key: this.parksKey
-  //     }
-  //   });
-  // }
   getTrails(trailObj: any): any {
     console.log(trailObj);
     let params: any = {}
@@ -111,14 +87,6 @@ export class SiteService {
     return this.http.get(this.trailLocationUrl, {
       params: params
     });
-    // return this.http.get(this.trailLocationUrl, {
-    //   params: {
-    //     key: this.hikingTrailsKey,
-    //     lat: latitude,
-    //     lon: longitude,
-    //     maxResults: this.maxResults
-    //   },
-    // });
   }
   getDefaultTrails(): any {
     return this.http.get(this.trailLocationUrl, {
@@ -142,17 +110,14 @@ export class SiteService {
   addToParkInfo(park: any): any {
     this.parkInfoPageArray = [];
     this.parkInfoPageArray.push(park)
-    // console.log(this.parkInfoPageArray)
   }
   addToCampgroundInfo(campground: any): any {
     this.campgroundInfoPageArray = [];
     this.campgroundInfoPageArray.push(campground)
-    // console.log(this.parkInfoPageArray)
   }
   addToTrailInfo(trail: any): any {
     this.trailInfoPageArray = [];
     this.trailInfoPageArray.push(trail)
-    // console.log(this.parkInfoPageArray)
   }
   getTrailInfoArray(): any {
     return this.trailInfoPageArray

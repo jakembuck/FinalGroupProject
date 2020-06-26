@@ -3,7 +3,6 @@
     flex-direction: column-reverse;
     align-items: center;
     background-color: #f9f8ed;
-    /* z-index: -2 */
 }
 .trail-map {
   display: flex;
@@ -17,7 +16,6 @@
 .trail-list-container{
   display: flex;
   flex-direction: column;
-  /* margin-top: 20px; */
   margin-top: 50px;
   margin-bottom: 20px;
   padding: 10px;
@@ -74,17 +72,14 @@
  
  .colors, .star-desc {
    margin:1px;
-   /* color: #706A67; */
    font-weight: 300 ;
  }
  #green {
-   /* color: green; */
    color: black;
 
    font-weight: 700 ;
  }
  #blue{
-  /* color: blue; */
   color: black;
 
   font-weight: 700 ;
@@ -145,7 +140,6 @@
 }
 .trail-list-container {
   width: 33.5%;
-  /* flex: 1; */
   margin-top: 20px;
 }
 .trailName{
